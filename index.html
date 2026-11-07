@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Andrea Gutiérrez Arcas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: rejilla editorial de 12 columnas con arranques desplazados; serif grande para titulares, sans pequeña para texto; esquinas rectas, sin sombras. Un solo tema cálido, por elección. */
+:root{
+  --bg:#FCFBF8; --paper:#F3F0EA; --ink:#141412; --muted:#6E6B64; --line:#DEDAD2; --accent:#2A4BD7;
+  --serif:"Instrument Serif", "Times New Roman", Georgia, serif;
+  --sans:"Inter", "Helvetica Neue", Arial, sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1;text-wrap:balance;letter-spacing:-.01em}
+em{font-style:italic}
+.wrap{max-width:1360px;margin:0 auto;padding:0 32px}
+.g{display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px}
+.label{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.rule{border-top:1px solid var(--line)}
+
+/* Cabecera */
+header{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px;gap:16px}
+.brand{font-family:var(--serif);font-size:24px;text-decoration:none}
+nav ul{list-style:none;display:flex;gap:32px}
+nav a{text-decoration:none;font-size:14px;color:var(--muted)}
+nav a:hover,nav a[aria-current="page"]{color:var(--ink)}
+.menu-btn{display:none;background:none;border:0;font:inherit;font-size:14px;cursor:pointer}
+
+.view{display:none}
+.view.on{display:block}
+
+/* Inicio */
+.hero{padding-top:96px;padding-bottom:72px}
+.hero h1{grid-column:1 / span 11;font-size:clamp(56px,9.5vw,148px)}
+.hero h1 em{color:var(--accent)}
+.hero .intro{grid-column:8 / span 5;margin-top:48px;font-size:17px;color:var(--muted);max-width:44ch}
+.hero .meta{grid-column:1 / span 4;margin-top:48px;align-self:end;display:grid;gap:4px}
+
+.hscroll{height:260vh;position:relative}
+.hscroll .sticky{position:sticky;top:64px;height:calc(100vh - 64px);overflow:hidden;display:flex;flex-direction:column;justify-content:center;gap:20px}
+.track{display:flex;gap:24px;padding:0 32px;will-change:transform}
+.track a{flex:0 0 auto;height:62vh;text-decoration:none;display:flex;flex-direction:column;gap:10px}
+.track img{height:100%;width:auto;object-fit:cover;background:var(--paper)}
+.track span{font-size:12px;color:var(--muted)}
+.hscroll .caption{padding:0 32px;display:flex;justify-content:space-between}
+@media (prefers-reduced-motion: reduce){
+  .hscroll{height:auto}.hscroll .sticky{position:static;height:auto;padding:48px 0}
+  .track{overflow-x:auto;transform:none!important}
+}
+
+.section{padding-top:120px;padding-bottom:120px}
+.section-head{align-items:end;margin-bottom:48px}
+.section-head h2{grid-column:1 / span 7;font-size:clamp(44px,6vw,88px)}
+.section-head p{grid-column:9 / span 4;color:var(--muted)}
+
+.work{list-style:none;border-top:1px solid var(--ink)}
+.work li{border-bottom:1px solid var(--line)}
+.work a,.work .row{display:grid;grid-template-columns:repeat(12,1fr);column-gap:24px;align-items:baseline;padding:28px 0;text-decoration:none}
+.work .n{grid-column:1 / span 1;font-size:13px;color:var(--muted)}
+.work h3{grid-column:2 / span 5;font-size:clamp(36px,4.4vw,64px)}
+.work .d{grid-column:7 / span 3;font-size:14px;color:var(--muted)}
+.work .y{grid-column:10 / span 2;font-size:14px;color:var(--muted)}
+.work .go{grid-column:12;justify-self:end;font-size:14px}
+.work a:hover h3{font-style:italic}
+.work .soon h3{color:var(--muted)}
+.work .soon .go{color:var(--muted)}
+
+.feature{margin-top:72px}
+.feature figure{grid-column:3 / span 10}
+.feature figcaption{display:flex;justify-content:space-between;margin-top:12px;font-size:13px;color:var(--muted)}
+
+.about-teaser{align-items:start}
+.about-teaser h2{grid-column:1 / span 6;font-size:clamp(40px,5vw,72px)}
+.about-teaser div{grid-column:8 / span 5;display:grid;gap:16px;color:var(--muted);font-size:17px}
+.textlink{display:inline-block;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:2px;width:max-content}
+.textlink:hover{color:var(--accent);border-color:var(--accent)}
+
+footer{background:var(--ink);color:var(--bg);padding:96px 0 40px}
+footer h2{grid-column:1 / span 12;font-size:clamp(64px,12vw,184px)}
+footer h2 a{text-decoration:none}
+footer h2 a:hover{font-style:italic}
+footer .cols{margin-top:72px;padding-top:20px;border-top:1px solid #3A3934;font-size:14px;color:#B9B5AC}
+footer .cols div:nth-child(1){grid-column:1 / span 4}
+footer .cols div:nth-child(2){grid-column:5 / span 4}
+footer .cols div:nth-child(3){grid-column:9 / span 4;text-align:right}
+
+/* Proyecto */
+.p-hero{padding-top:72px;padding-bottom:48px}
+.p-hero .back{grid-column:1 / span 12;font-size:14px;color:var(--muted);text-decoration:none;margin-bottom:56px}
+.p-hero .back:hover{color:var(--ink)}
+.p-hero h1{grid-column:1 / span 12;font-size:clamp(72px,14vw,220px)}
+.p-hero .lead{grid-column:6 / span 6;font-size:20px;margin-top:40px;max-width:52ch}
+.facts{margin-top:64px;border-top:1px solid var(--ink)}
+.facts>div{grid-column:span 3;padding:18px 0;display:grid;gap:6px;font-size:15px}
+.facts ul{list-style:none}
+.full{margin:24px 0 0;max-width:960px;margin-left:auto}
+.full img{width:100%}
+.block{padding:96px 0 0;align-items:start}
+.block .side{grid-column:1 / span 3;position:sticky;top:96px}
+.block .side .num{font-family:var(--serif);font-size:56px;line-height:1;color:var(--accent)}
+.block .body{grid-column:5 / span 7}
+.block h2{font-size:clamp(36px,4vw,56px);margin-bottom:24px}
+.block h3{font-family:var(--sans);font-size:13px;font-weight:500;text-transform:uppercase;letter-spacing:.08em;margin:40px 0 12px}
+.block p{max-width:62ch;font-size:17px}
+.block p+p{margin-top:14px}
+.block ul.list{list-style:none;border-top:1px solid var(--line);max-width:62ch;margin-top:20px}
+.block ul.list li{border-bottom:1px solid var(--line);padding:14px 0;font-size:16px}
+.block ul.list b{font-weight:500}
+.img-wide{grid-column:1 / span 12;margin-top:56px}
+.img-right{grid-column:4 / span 9;margin-top:56px}
+.img-left{grid-column:1 / span 9;margin-top:56px}
+figure button{all:unset;cursor:zoom-in;display:block}
+figure figcaption{font-size:13px;color:var(--muted);margin-top:10px}
+.duo{grid-column:1 / span 12;display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px}
+.duo figure:nth-child(2){margin-top:96px}
+
+.nums{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);margin-top:32px}
+.nums div{padding:20px 16px 0 0}
+.nums b{font-family:var(--serif);font-weight:400;font-size:64px;line-height:1;display:block;font-variant-numeric:tabular-nums}
+.nums span{font-size:14px;color:var(--muted)}
+
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin-top:24px;border-top:1px solid var(--line)}
+.quotes div{border-bottom:1px solid var(--line);padding:18px 0}
+.quotes .label{color:var(--accent)}
+.quotes p{font-size:16px;margin-top:4px}
+
+.moscow{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--ink);margin-top:28px}
+.moscow div{padding:16px 16px 0 0;font-size:15px}
+.moscow .label{display:block;margin-bottom:8px;color:var(--ink)}
+
+.screens{grid-column:1 / span 12;display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:56px}
+.screens figure:nth-child(even){margin-top:56px}
+
+table.t{width:100%;border-collapse:collapse;margin-top:24px;font-size:15px}
+table.t th,table.t td{text-align:left;padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top}
+table.t th{font-weight:400;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--ink)}
+table.t td:last-child,table.t th:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:16px}
+.tw{overflow-x:auto}
+
+.next{margin-top:144px;border-top:1px solid var(--ink);padding:32px 0 120px;align-items:end}
+.next .label{grid-column:1 / span 3}
+.next a{grid-column:4 / span 9;font-family:var(--serif);font-size:clamp(48px,7vw,112px);line-height:1;text-decoration:none}
+.next a:hover{font-style:italic}
+
+/* Sobre mí / Contacto */
+.page-hero{padding-top:96px;padding-bottom:64px}
+.page-hero h1{grid-column:1 / span 12;font-size:clamp(64px,11vw,176px)}
+.bio{align-items:start;padding-bottom:96px}
+.bio .portrait{grid-column:1 / span 4;aspect-ratio:4/5;background:var(--paper);overflow:hidden;margin:0}
+.bio .portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.bio .portrait span{font-family:var(--serif);font-size:96px;line-height:.8;color:var(--accent)}
+.bio .txt{grid-column:6 / span 6;display:grid;gap:18px;font-size:19px}
+.cv{padding-bottom:120px}
+.cv .col{grid-column:span 4;border-top:1px solid var(--ink);padding-top:16px}
+.cv ul{list-style:none;margin-top:16px}
+.cv li{padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+.cv li span{display:block;color:var(--muted);font-size:13px}
+.contact-grid{padding-bottom:144px}
+.contact-grid>div{grid-column:span 4;border-top:1px solid var(--ink);padding-top:16px;display:grid;gap:8px}
+.contact-grid .big{font-family:var(--serif);font-size:clamp(28px,3vw,40px);line-height:1.1;word-break:break-word}
+.copy{background:none;border:1px solid var(--ink);font:inherit;font-size:13px;padding:6px 12px;cursor:pointer;width:max-content}
+.copy:hover{background:var(--ink);color:var(--bg)}
+
+
+/* Bloques de Anima */
+.pm{margin-top:96px;align-items:center}
+.pm-txt{grid-column:1 / span 5;display:grid;gap:16px}
+.pm-txt h3{font-size:clamp(32px,3.6vw,52px)}
+.pm-txt p{color:var(--muted);font-size:17px}
+.pm-img{grid-column:7 / span 6}
+.pm-img figcaption{display:flex;justify-content:space-between;margin-top:12px;font-size:13px;color:var(--muted)}
+.body2{grid-column:5 / span 7}
+.gantt-wrap{grid-column:1 / span 12;margin-top:48px;overflow-x:auto}
+.gantt{min-width:820px;border-top:1px solid var(--ink)}
+.gh,.gr{display:grid;grid-template-columns:240px repeat(15,1fr);align-items:center}
+.gh span{font-size:11px;color:var(--muted);padding:10px 0;text-align:center}
+.gh span:first-child{text-align:left}
+.gr{border-bottom:1px solid var(--line);min-height:56px;position:relative}
+.gr span{font-size:14px;padding:8px 12px 8px 0}
+.gr small{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.gr i{grid-column:calc(var(--s) + 1) / calc(var(--e) + 1);height:22px;background:var(--ink)}
+.gr.agile i{background:none;display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.gr.agile i b{background:var(--accent)}
+.risk{display:grid;grid-template-columns:240px 1fr;gap:32px;margin-top:28px;align-items:start}
+.matrix{position:relative;padding:0 0 24px 24px}
+.matrix .cells{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:repeat(5,1fr);aspect-ratio:1;border-left:1px solid var(--ink);border-bottom:1px solid var(--ink);background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:20% 20%}
+.matrix .cells div{grid-column:var(--x);grid-row:calc(6 - var(--y));display:flex;align-items:center;justify-content:center;text-align:center;font-size:11px;line-height:1.2;padding:2px}
+.matrix .hi{background:#C9D3F5}.matrix .top{background:var(--accent);color:#fff}.matrix .mid{background:#E3E8F8}.matrix .lo{background:var(--paper)}
+.matrix .ax-y{position:absolute;left:0;top:50%;transform:rotate(-90deg) translateX(50%);transform-origin:left top;font-size:11px;color:var(--muted);white-space:nowrap}
+.matrix .ax-x{position:absolute;bottom:0;left:24px;font-size:11px;color:var(--muted)}
+.bars{margin-top:24px;border-top:1px solid var(--ink)}
+.bar{display:grid;grid-template-columns:220px 1fr 130px;gap:16px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.bar i{height:10px;background:var(--ink);width:calc(var(--v) / 65 * 100%)}
+.bar b{font-weight:500;text-align:right;font-variant-numeric:tabular-nums}
+.bar.total{border-bottom:1px solid var(--ink)}
+.bar.total b{color:var(--accent);white-space:nowrap}
+@media (max-width:900px){
+  .pm-txt,.pm-img,.body2{grid-column:1 / -1}
+  .pm-img{margin-top:24px}
+  .risk{grid-template-columns:1fr}
+  .matrix{max-width:260px}
+  .bar{grid-template-columns:1fr 100px}.bar i{grid-column:1 / -1;grid-row:2}
+}
+
+
+/* Bloques de LuminaIoT */
+.ciclo{display:flex;flex-wrap:wrap;margin-top:40px;border-top:1px solid var(--ink)}
+.ciclo span{flex:1 1 auto;font-size:12px;text-transform:uppercase;letter-spacing:.08em;padding:14px 16px 0 0;color:var(--muted);position:relative}
+.ciclo span+span::before{content:"→";margin-right:12px;color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.chips span{border:1px solid var(--line);padding:6px 12px;font-size:14px}
+.story{display:grid;grid-template-columns:1fr 1fr;margin-top:32px;border:1px solid var(--ink)}
+.story>div{padding:20px;display:grid;gap:8px;align-content:start}
+.story-back{background:var(--paper);border-left:1px solid var(--ink)}
+.story p{font-size:16px}
+.sprints-plan{grid-column:1 / span 12;display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;border-top:1px solid var(--ink)}
+.sprints-plan>div{padding:18px 20px 20px 0;display:grid;gap:10px;align-content:start}
+.sprints-plan>div+div{padding-left:20px;border-left:1px solid var(--line)}
+.block .sprints-plan h3{font-family:var(--serif);font-weight:400;font-size:30px;text-transform:none;letter-spacing:-.01em;margin:0}
+.sprints-plan ul{list-style:none}
+.sprints-plan li{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.sprints-plan li i{font-style:normal;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.sprints-plan .sel{background:var(--paper)}
+.sprints-plan .sel .label{color:var(--accent)}
+.phones{grid-column:1 / span 12;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;align-items:start}
+.phones figure:nth-child(even){margin-top:48px}
+pre.code{margin-top:20px;background:var(--ink);color:#EDE9E1;padding:20px;overflow-x:auto;font-size:13px;line-height:1.55;font-family:ui-monospace,Menlo,Consolas,monospace}
+@media (max-width:900px){
+  .story{grid-template-columns:1fr}.story-back{border-left:0;border-top:1px solid var(--ink)}
+  .sprints-plan{grid-template-columns:1fr 1fr}.sprints-plan>div{padding-left:0!important;border-left:0!important;border-bottom:1px solid var(--line)}
+  .phones{grid-template-columns:1fr 1fr}
+}
+
+
+/* Bloques de AutoTaxi */
+.status-pill{grid-column:1 / span 12;justify-self:start;font-size:12px;text-transform:uppercase;letter-spacing:.08em;border:1px solid var(--accent);color:var(--accent);padding:4px 10px;margin-bottom:20px}
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);margin-top:40px;border-top:1px solid var(--ink)}
+.roadmap>div{padding:16px 20px 0 0;display:grid;gap:6px;align-content:start}
+.roadmap>div+div{padding-left:20px;border-left:1px solid var(--line)}
+.roadmap b{font-family:var(--serif);font-weight:400;font-size:28px;line-height:1.1}
+.roadmap p{font-size:14px;color:var(--muted)}
+.roadmap .done .label::before{content:"✓ ";color:var(--ink)}
+.roadmap .now .label{color:var(--accent)}
+.roadmap .now b{font-style:italic}
+code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em}
+pre.code.term{background:#1E1E1B;color:#C9E4B4}
+table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right;white-space:nowrap;padding-left:16px;font-variant-numeric:tabular-nums}
+@media (max-width:900px){.roadmap{grid-template-columns:1fr}.roadmap>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:12px}}
+
+
+/* Bloques de NBA */
+.note{font-size:13px!important;color:var(--muted);margin-top:8px!important}
+.stack{display:flex;height:44px;margin-top:20px;max-width:62ch}
+.stack div{width:calc(var(--w) * 1%);display:flex;align-items:center;padding:0 10px;font-size:12px;overflow:hidden;white-space:nowrap}
+.stack .a{background:var(--ink);color:var(--bg)}
+.stack .b{background:var(--accent);color:#fff;justify-content:center;padding:0}
+.yearbars{display:grid;grid-template-columns:repeat(23,1fr);gap:3px;align-items:end;height:180px;margin-top:24px;max-width:62ch;border-bottom:1px solid var(--ink)}
+.yearbars div{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;position:relative}
+.yearbars i{width:100%;height:calc(var(--v) / 86 * 150px);min-height:1px;background:var(--muted);display:block;position:relative}
+.yearbars .peak i{background:var(--accent)}
+.yearbars i b{position:absolute;top:-18px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:500;color:var(--accent);font-style:normal}
+.yearbars span{position:absolute;bottom:-20px;font-size:10px;color:var(--muted)}
+.yearbars+.note{margin-top:28px!important}
+.hyp li{display:grid;gap:4px}
+.hyp .label{color:var(--accent)}
+.lights{display:grid;grid-template-columns:repeat(3,1fr);margin-top:24px;border-top:1px solid var(--ink)}
+.lights div{padding:16px 16px 0 0;display:grid;gap:6px;align-content:start;font-size:14px}
+.lights i{width:18px;height:18px;border-radius:50%}
+.lights b{font-family:var(--serif);font-weight:400;font-size:26px}
+.lights span{color:var(--muted)}
+.l-g i{background:#4F8A5B}.l-a i{background:#D9A23B}.l-r i{background:#B4472F}
+.pipeline{grid-column:1 / span 12;display:grid;grid-template-columns:repeat(6,1fr);margin-top:40px;border-top:1px solid var(--ink)}
+.pipeline div{padding:16px 16px 0 0;display:grid;gap:4px;align-content:start;position:relative}
+.pipeline div+div{padding-left:16px;border-left:1px solid var(--line)}
+.pipeline b{font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.1}
+.pipeline p{font-size:13px;color:var(--muted)}
+@media (max-width:900px){
+  .lights{grid-template-columns:1fr}
+  .pipeline{grid-template-columns:1fr 1fr}.pipeline div+div{padding-left:0;border-left:0}
+  .yearbars span{display:none}
+}
+
+
+/* Bloques de Djenice */
+.video-fig{max-width:none!important;margin-left:0!important}
+.video-fig video{width:100%;display:block;background:#000}
+.video-fig figcaption{font-size:13px;color:var(--muted);margin-top:10px}
+.sitemap{grid-column:1 / span 12;margin-top:40px}
+.sitemap .root{font-family:var(--serif);font-size:28px;padding-bottom:16px;border-bottom:1px solid var(--ink)}
+.sitemap .branches{display:grid;grid-template-columns:repeat(4,1fr)}
+.sitemap .branches div{padding:16px 16px 0 0;display:grid;gap:4px}
+.sitemap .branches div+div{padding-left:16px;border-left:1px solid var(--line)}
+.sitemap b{font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+.sitemap span{font-size:14px;color:var(--muted)}
+@media (max-width:900px){.sitemap .branches{grid-template-columns:1fr 1fr}.sitemap .branches div+div{padding-left:0;border-left:0}}
+
+/* Visor y revelado */
+#lb{position:fixed;inset:0;background:rgba(20,20,18,.92);display:none;align-items:center;justify-content:center;padding:24px;z-index:50;cursor:zoom-out}
+#lb.on{display:flex}
+#lb img{max-height:92vh;width:auto}
+.rv{transition:opacity .9s ease, transform .9s ease}
+.rv.pre{opacity:0;transform:translateY(24px)}
+@media (prefers-reduced-motion: reduce){.rv,.rv.pre{opacity:1;transform:none;transition:none}}
+
+@media (max-width:900px){
+  .wrap{padding:0 20px}
+  .g{column-gap:16px}
+  .hero h1,.hero .intro,.hero .meta,.section-head h2,.section-head p,.about-teaser h2,.about-teaser div,.feature figure,
+  .p-hero .lead,.block .side,.block .body,.img-right,.img-left,.bio .portrait,.bio .txt,.next .label,.next a{grid-column:1 / -1}
+  .hero .meta{order:3}
+  .block .side{position:static;margin-bottom:16px;display:flex;gap:16px;align-items:baseline}
+  .facts>div{grid-column:span 6}
+  .work .n{display:none}.work h3{grid-column:1 / span 8}.work .d{grid-column:1 / span 8;order:3}.work .y{grid-column:9 / span 3}.work .go{grid-column:12}
+  .nums,.moscow{grid-template-columns:1fr 1fr}
+  .quotes,.duo{grid-template-columns:1fr}.duo figure:nth-child(2){margin-top:0}
+  .screens{grid-template-columns:repeat(3,1fr)}.screens figure:nth-child(even){margin-top:24px}
+  .cv .col,.contact-grid>div{grid-column:1 / -1;margin-bottom:32px}
+  .bio .portrait{aspect-ratio:4/5;max-width:420px;margin-bottom:32px}
+  footer .cols div:nth-child(n){grid-column:1 / -1;text-align:left;margin-bottom:8px}
+  nav ul{display:none}
+  .menu-btn{display:block}
+  nav.open ul{display:flex;flex-direction:column;position:fixed;top:64px;right:0;bottom:0;width:min(320px,85vw);background:var(--bg);border-left:1px solid var(--line);padding:32px 24px;gap:20px}
+  nav.open ul a{font-family:var(--serif);font-size:36px;color:var(--ink)}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#inicio">Andrea Gutiérrez Arcas</a>
+    <nav id="nav" aria-label="Principal">
+      <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="navList">Menú</button>
+      <ul id="navList">
+        <li><a href="#proyectos" data-v="proyectos">Proyectos</a></li>
+        <li><a href="#sobre-mi" data-v="sobre-mi">Sobre mí</a></li>
+        <li><a href="#contacto" data-v="contacto">Contacto</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= INICIO ================= -->
+<main class="view on" id="v-inicio">
+  <section class="hero wrap">
+    <div class="g">
+      <h1>Diseño para personas, <em>construido</em> con ingeniería y creatividad.</h1>
+      <div class="meta"><span class="label">UX/UI · Computer Science &amp; IA</span><span class="label">Madrid, 2026</span></div>
+      <p class="intro">Increíblemente creativa y curiosa. Mezclo una visión sensible, centrada en el usuario, con herramientas de ingeniería para convertir ideas en pruebas de concepto que se pueden tocar, testear y explicar. Esta es una selección de proyectos de diseño, gestión, ingeniería de software y datos.</p>
+    </div>
+  </section>
+
+  <section class="section wrap" id="proyectos-lista">
+    <div class="g section-head rv">
+      <h2>Proyectos <em>seleccionados</em></h2>
+      <p>Seis proyectos de disciplinas distintas: del research con usuarios a la gestión de proyectos, el código y los datos.</p>
+    </div>
+    <ol class="work rv">
+      <li><a href="#housemate"><span class="n">01</span><h3>HouseMate</h3><span class="d">UX/UI · Research · Prototipado</span><span class="y">2024–25</span><span class="go">Ver →</span></a></li>
+      <li><a href="#anima"><span class="n">02</span><h3>Anima</h3><span class="d">Project management · IA en salud</span><span class="y">2025–26</span><span class="go">Ver →</span></a></li>
+      <li><a href="#luminaiot"><span class="n">03</span><h3>LuminaIoT</h3><span class="d">Software lifecycle · Scrum · UML</span><span class="y">2026</span><span class="go">Ver →</span></a></li>
+      <li><a href="#autotaxi"><span class="n">04</span><h3>AutoTaxi</h3><span class="d">Python · Estructuras de datos · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
+      <li><a href="#nba"><span class="n">05</span><h3>NBA</h3><span class="d">Análisis de datos · pandas · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
+      <li><a href="#djenice"><span class="n">06</span><h3>Djenice Duarte Photo</h3><span class="d">Diseño web · Figma y Framer</span><span class="y">2026</span><span class="go">Ver →</span></a></li>
+    </ol>
+  </section>
+
+  <section class="section wrap rule">
+    <div class="g about-teaser rv">
+      <h2>De la moda a la tecnología, <em>siempre</em> pensando en el usuario.</h2>
+      <div>
+        <p>Siete años en la industria de la moda me enseñaron a entender al consumidor. El diseño UX/UI me enseñó a investigarlo. Ahora estudio Computer Science &amp; IA para construir las soluciones que antes solo podía imaginar.</p>
+        <a class="textlink" href="#sobre-mi">Sobre mí</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= PROYECTOS ================= -->
+<main class="view" id="v-proyectos">
+  <section class="page-hero wrap"><div class="g"><h1>Proyectos</h1></div></section>
+  <section class="wrap" style="padding-bottom:120px">
+    <ol class="work">
+      <li><a href="#housemate"><span class="n">01</span><h3>HouseMate</h3><span class="d">UX/UI · Research · Prototipado</span><span class="y">2024–25</span><span class="go">Ver →</span></a></li>
+      <li><a href="#anima"><span class="n">02</span><h3>Anima</h3><span class="d">Project management · IA en salud</span><span class="y">2025–26</span><span class="go">Ver →</span></a></li>
+      <li><a href="#luminaiot"><span class="n">03</span><h3>LuminaIoT</h3><span class="d">Software lifecycle · Scrum · UML</span><span class="y">2026</span><span class="go">Ver →</span></a></li>
+      <li><a href="#autotaxi"><span class="n">04</span><h3>AutoTaxi</h3><span class="d">Python · Estructuras de datos · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
+      <li><a href="#nba"><span class="n">05</span><h3>NBA</h3><span class="d">Análisis de datos · pandas · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
+      <li><a href="#djenice"><span class="n">06</span><h3>Djenice Duarte Photo</h3><span class="d">Diseño web · Figma y Framer</span><span class="y">2026</span><span class="go">Ver →</span></a></li>
+    </ol>
+  </section>
+</main>
+
+<!-- ================= HOUSEMATE ================= -->
+<main class="view" id="v-housemate">
+  <section class="p-hero wrap">
+    <div class="g">
+      <a class="back" href="#proyectos">← Proyectos</a>
+      <h1>House<em>Mate</em></h1>
+      <p class="lead">Compartir piso es fácil hasta que alguien deja los platos en el fregadero tres días. HouseMate es una app para coordinar tareas, avisar de incidencias, repartir gastos y acordar normas entre compañeros de vivienda, diseñada a partir de lo que contaron los propios inquilinos.</p>
+    </div>
+    <div class="g facts">
+      <div><span class="label">Contexto</span>Proyecto final, bootcamp UX/UI de Neoland</div>
+      <div><span class="label">Año</span>2024–25</div>
+      <div><span class="label">Rol</span>Proyecto individual: research, estrategia, UX y UI</div>
+      <div><span class="label">Disciplinas</span><ul><li>User research</li><li>Arquitectura de la información</li><li>Prototipado en Figma</li><li>Testing con usuarios</li></ul></div>
+    </div>
+    <figure class="full"><button type="button" data-full="img/housemate/cover.jpg" aria-label="Ampliar portada"><img src="img/housemate/cover.jpg" alt="Portada del proyecto HouseMate"></button></figure>
+  </section>
+
+  <div class="wrap">
+    <section class="g block rv">
+      <div class="side"><div class="num">01</div><span class="label">Problema</span></div>
+      <div class="body">
+        <h2>La convivencia falla por coordinación, no por mala voluntad</h2>
+        <p>Partí de una hipótesis: en un piso compartido los conflictos casi nunca vienen de una gran pelea, sino de pequeñas fricciones que se acumulan. Las agrupé en seis áreas: reparto desigual de tareas, estándares de limpieza distintos, responsabilidades olvidadas, falta de comunicación, horarios incompatibles e invitados en los espacios comunes.</p>
+        <p><em>¿Cómo puede una herramienta ayudar a que cada compañero sepa qué le toca, avise de lo que pasa y sienta que el reparto es justo, sin aumentar la tensión?</em></p>
+      </div>
+      <figure class="img-right"><button type="button" data-full="img/housemate/problema.jpg" aria-label="Ampliar imagen"><img src="img/housemate/problema.jpg" alt="Las seis problemáticas de la convivencia" loading="lazy"></button><figcaption>Las seis fuentes de conflicto de las que partió el research.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">02</div><span class="label">Research</span></div>
+      <div class="body">
+        <h2>Escuchar antes de diseñar</h2>
+        <p>Combiné investigación cuantitativa y cualitativa para validar el problema y entender quién lo sufre y quién podría pagar la solución.</p>
+        <div class="nums">
+          <div><b>18</b><span>encuestas a personas que comparten vivienda</span></div>
+          <div><b>6</b><span>entrevistas, incluido un casero</span></div>
+          <div><b>5</b><span>apps competidoras en el benchmark</span></div>
+          <div><b>50%</b><span>pagaría hasta 5 € al mes</span></div>
+        </div>
+        <h3>Lo que descubrí</h3>
+        <div class="quotes">
+          <div><span class="label">Hueco de mercado</span><p>La mayoría no tiene ningún método para coordinar las tareas del hogar, y quien usa alguno no está contento con él.</p></div>
+          <div><span class="label">Mayor conflicto</span><p>Las diferencias en el estándar de limpieza son el principal punto de ruptura.</p></div>
+          <div><span class="label">Problema recurrente</span><p>La falta de comunicación y el reparto injusto de tareas son lo más frecuente.</p></div>
+          <div><span class="label">Formato</span><p>Todos se organizan con el móvil, así que la solución tenía que ser una app.</p></div>
+        </div>
+        <p style="margin-top:24px">El benchmark y el DAFO abrieron oportunidades que luego entraron en la hoja de ruta: asignación de tareas con IA, gamificación, gestión de gastos y una versión para empresas de coliving.</p>
+      </div>
+      <div class="duo">
+        <figure><button type="button" data-full="img/housemate/encuestas.jpg" aria-label="Ampliar imagen"><img src="img/housemate/encuestas.jpg" alt="Resultados de las encuestas" loading="lazy"></button><figcaption>Encuestas: resultados y conclusiones propias.</figcaption></figure>
+        <figure><button type="button" data-full="img/housemate/entrevistas.jpg" aria-label="Ampliar imagen"><img src="img/housemate/entrevistas.jpg" alt="Entrevistas y arquetipos" loading="lazy"></button><figcaption>Entrevistas: cuatro temas y dos arquetipos.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">03</div><span class="label">Síntesis</span></div>
+      <div class="body">
+        <h2>Para quién diseño</h2>
+        <p>Del research salieron dos perfiles: Sofía, la user persona, que vive con compañeros y sufre las fricciones a diario, y Laura, la buyer persona. El journey map de un día normal de Sofía muestra dónde se rompe la experiencia: la lavadora que nadie vacía, la ducha sin agua caliente, los platos sucios y el ruido de madrugada.</p>
+      </div>
+      <figure class="img-wide"><button type="button" data-full="img/housemate/journey.jpg" aria-label="Ampliar imagen"><img src="img/housemate/journey.jpg" alt="Journey map de Sofía" loading="lazy"></button><figcaption>Journey map: cada momento bajo la línea es una oportunidad de diseño.</figcaption></figure>
+      <div class="duo">
+        <figure><button type="button" data-full="img/housemate/personas.jpg" aria-label="Ampliar imagen"><img src="img/housemate/personas.jpg" alt="User y buyer persona" loading="lazy"></button><figcaption>User persona y buyer persona.</figcaption></figure>
+        <figure><button type="button" data-full="img/housemate/empatia.jpg" aria-label="Ampliar imagen"><img src="img/housemate/empatia.jpg" alt="Mapa de empatía" loading="lazy"></button><figcaption>Mapa de empatía de Sofía.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">04</div><span class="label">Definición</span></div>
+      <div class="body">
+        <h2>Decidir qué entra y qué no</h2>
+        <p>La ideación dejó más de 25 funcionalidades posibles. Las ordené con un In &amp; Out y un MoSCoW para que el MVP resolviera primero los dolores que más se repetían en el research.</p>
+        <div class="moscow">
+          <div><span class="label">Must have</span>Crear o unirse a un piso, chat con niveles de urgencia, gestión de invitados, perfiles.</div>
+          <div><span class="label">Should have</span>Número de registro asociado a cada piso.</div>
+          <div><span class="label">Could have</span>Seguimiento del progreso y niveles de usuario por puntos.</div>
+          <div><span class="label">Won't have</span>Tutoriales, plano del piso e inventario de bienes.</div>
+        </div>
+        <p style="margin-top:24px">Con eso definí una arquitectura de seis áreas: Tareas, Incidencias, Monedero, Mi casa, Comunidad y Calendario.</p>
+      </div>
+      <figure class="img-left"><button type="button" data-full="img/housemate/arquitectura.jpg" aria-label="Ampliar imagen"><img src="img/housemate/arquitectura.jpg" alt="Arquitectura de la información" loading="lazy"></button><figcaption>Arquitectura de la información.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">05</div><span class="label">Diseño</span></div>
+      <div class="body">
+        <h2>De wireframe a alta fidelidad</h2>
+        <p>Empecé con wireframes de baja fidelidad para validar la estructura y después construí el prototipo interactivo en Figma con un sistema de componentes propio. Cada decisión responde a algo del research:</p>
+        <ul class="list">
+          <li><b>Incidencias con un toque.</b> Mensajes rápidos predefinidos ("Platos sucios", "No hay agua caliente") para avisar sin confrontación directa.</li>
+          <li><b>Monedero.</b> Cada uno ve cuánto debe y a quién, con tickets por gasto, para quitar tensión al dinero compartido.</li>
+          <li><b>Ranking y puntos.</b> La gamificación convierte el reparto de tareas en algo visible y motivador, en lugar de un reproche.</li>
+          <li><b>Mi casa.</b> Normas, datos del piso y solicitudes de invitados en un solo espacio.</li>
+        </ul>
+      </div>
+      <figure class="img-right"><button type="button" data-full="img/housemate/wireframes.jpg" aria-label="Ampliar imagen"><img src="img/housemate/wireframes.jpg" alt="Wireframes" loading="lazy"></button><figcaption>Wireframes de baja fidelidad.</figcaption></figure>
+      <div class="screens">
+        <figure><button type="button" data-full="img/housemate/s-home.jpg" aria-label="Ampliar pantalla"><img src="img/housemate/s-home.jpg" alt="Inicio" loading="lazy"></button><figcaption>Inicio</figcaption></figure>
+        <figure><button type="button" data-full="img/housemate/s-tareas.jpg" aria-label="Ampliar pantalla"><img src="img/housemate/s-tareas.jpg" alt="Tareas" loading="lazy"></button><figcaption>Tareas</figcaption></figure>
+        <figure><button type="button" data-full="img/housemate/s-incidencias.jpg" aria-label="Ampliar pantalla"><img src="img/housemate/s-incidencias.jpg" alt="Incidencias" loading="lazy"></button><figcaption>Incidencias</figcaption></figure>
+        <figure><button type="button" data-full="img/housemate/s-monedero.jpg" aria-label="Ampliar pantalla"><img src="img/housemate/s-monedero.jpg" alt="Monedero" loading="lazy"></button><figcaption>Monedero</figcaption></figure>
+        <figure><button type="button" data-full="img/housemate/s-comunidad.jpg" aria-label="Ampliar pantalla"><img src="img/housemate/s-comunidad.jpg" alt="Comunidad" loading="lazy"></button><figcaption>Comunidad</figcaption></figure>
+        <figure><button type="button" data-full="img/housemate/s-micasa.jpg" aria-label="Ampliar pantalla"><img src="img/housemate/s-micasa.jpg" alt="Mi casa" loading="lazy"></button><figcaption>Mi casa</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">06</div><span class="label">Testing</span></div>
+      <div class="body">
+        <h2>Probarlo con una usuaria real</h2>
+        <p>Hice un test moderado del prototipo con una usuaria: un flujo guiado por las seis áreas de la app, con libertad para explorar. Después valoró cada tarea del 1 al 5 y respondió preguntas abiertas.</p>
+        <div class="tw">
+          <table class="t">
+            <thead><tr><th>Tarea</th><th>Valoración</th></tr></thead>
+            <tbody>
+              <tr><td>Registrarse y crear una nueva vivienda</td><td>5 / 5</td></tr>
+              <tr><td>Crear un recordatorio con fecha y prioridad en la lista de la compra</td><td>5 / 5</td></tr>
+              <tr><td>Enviar un aviso de incidencia a todos los compañeros</td><td>5 / 5</td></tr>
+              <tr><td>Enviar una solicitud de invitados</td><td>5 / 5</td></tr>
+              <tr><td>Claridad con la que la app presenta la información</td><td>5 / 5</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Del feedback a la siguiente versión</h3>
+        <ul class="list">
+          <li><b>Detectado.</b> En Incidencias, el texto de algunos botones se salía del contenedor; lo anoté como corrección de UI.</li>
+          <li><b>Pedido.</b> Sincronizar el calendario de la app con el personal; entró en la hoja de ruta como integración con Google Calendar.</li>
+          <li><b>Percibido.</b> La interfaz le transmitió tranquilidad y seriedad, justo lo que buscaba para una app que gestiona conflictos.</li>
+        </ul>
+      </div>
+      <figure class="img-left"><button type="button" data-full="img/housemate/userflow.jpg" aria-label="Ampliar imagen"><img src="img/housemate/userflow.jpg" alt="User flow del test" loading="lazy"></button><figcaption>Flujo guiado que siguió la usuaria durante el test.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">07</div><span class="label">Resultado</span></div>
+      <div class="body">
+        <h2>Un MVP listo para crecer</h2>
+        <p>El MVP permite crear un piso o unirse con un código de 4 dígitos, compartir listas de tareas con puntos, gestionar gastos y deudas, enviar incidencias, consultar rankings dentro del piso y entre pisos, gestionar normas e invitados y subir fotos de los desperfectos del piso para el casero.</p>
+        <p>Los siguientes pasos son conectar Google Calendar, una plataforma para empresas de coliving, un portal para el casero y la asignación de tareas con IA, que detectaría los conflictos más repetidos en las incidencias y propondría soluciones antes de que escalen.</p>
+        <h3>Qué aprendí</h3>
+        <ul class="list">
+          <li>El research cambia el producto: la gestión de invitados y las incidencias rápidas no estaban en mi idea inicial y salieron de escuchar a los usuarios.</li>
+          <li>Priorizar es diseñar. Dejar fuera funcionalidades atractivas fue lo que hizo coherente el MVP.</li>
+          <li>En la siguiente iteración testearía con al menos cinco personas y perfiles distintos, incluido el casero.</li>
+        </ul>
+        <p style="margin-top:32px"><a class="textlink" href="https://www.figma.com/design/AMzI1kCghXokZvaAXuWYr6/andrea.gutierrez_PFB?node-id=0-1">Ver el proyecto completo en Figma ↗</a></p>
+      </div>
+      <figure class="img-wide"><button type="button" data-full="img/housemate/prototipo.jpg" aria-label="Ampliar imagen"><img src="img/housemate/prototipo.jpg" alt="Prototipo final" loading="lazy"></button><figcaption>Prototipo de alta fidelidad.</figcaption></figure>
+    </section>
+
+    <section class="g next">
+      <span class="label">Siguiente proyecto</span>
+      <a href="#anima">An<em>ima</em> →</a>
+    </section>
+  </div>
+</main>
+
+<!-- ================= ANIMA ================= -->
+<main class="view" id="v-anima">
+  <section class="p-hero wrap">
+    <div class="g">
+      <a class="back" href="#proyectos">← Proyectos</a>
+      <h1>An<em>ima</em></h1>
+      <p class="lead">Cuando me encuentro mal, lo primero que hago es llamar a mi madre. Desde que me independicé, ese apoyo no siempre está, y buscar en internet me genera más ansiedad que calma. Anima es una app de inteligencia artificial que orienta ante síntomas leves con información médica contrastada y acompañamiento emocional. Este proyecto es su plan completo: de la idea a un MVP en 15 meses.</p>
+    </div>
+    <div class="g facts">
+      <div><span class="label">Contexto</span>Unit 6 · Planning a Computing Project, Computer Science &amp; IA, MSMK</div>
+      <div><span class="label">Año</span>2025–26</div>
+      <div><span class="label">Rol</span>Proyecto individual: CEO y project manager del plan</div>
+      <div><span class="label">Herramientas de gestión</span><ul><li>EDT y PERT</li><li>Cronograma y metodología híbrida</li><li>Matriz de requisitos y Hoshin Kanri</li><li>Riesgos, calidad (KPIs, PDCA) y CBS</li></ul></div>
+    </div>
+    <figure class="full"><button type="button" data-full="img/anima/cover.jpg" aria-label="Ampliar portada"><img src="img/anima/cover.jpg" alt="Portada de Anima: el futuro del bienestar, más humano"></button></figure>
+  </section>
+
+  <div class="wrap">
+    <section class="g block rv">
+      <div class="side"><div class="num">01</div><span class="label">Origen</span></div>
+      <div class="body">
+        <h2>Una necesidad personal y un sistema saturado</h2>
+        <p>Anima, "alma" en latín, nace de una carencia que comparte mucha gente: ante un dolor leve no sabemos si preocuparnos, y la información que encontramos suele asustar más que ayudar. Eso acaba en consultas que no hacían falta, en un sistema sanitario que ya va al límite.</p>
+        <div class="nums">
+          <div><b>21%</b><span>de los españoles es atendido por su médico de cabecera al día siguiente de pedir cita</span></div>
+          <div><b>38,2%</b><span>espera más de 3 meses para ver al especialista</span></div>
+          <div><b>2</b><span>objetivos: reducir la ansiedad y descongestionar la sanidad</span></div>
+          <div><b>15</b><span>meses planificados hasta el MVP</span></div>
+        </div>
+        <p style="margin-top:24px">Datos de atención primaria citados en el informe del proyecto.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">02</div><span class="label">Alcance</span></div>
+      <div class="body">
+        <h2>Una IA de salud tiene que saber qué no hacer</h2>
+        <p>El alcance fue la decisión más importante del proyecto. Anima solo trabaja con patologías leves, frecuentes y de bajo riesgo clínico que generan mucha ansiedad cotidiana. Todo lo demás queda fuera, y la app tiene que reconocerlo.</p>
+        <div class="quotes">
+          <div><span class="label">Dentro del alcance</span><p>Molestias digestivas, musculoesqueléticas y respiratorias leves, estrés y ansiedad situacional, fatiga y alteraciones del sueño.</p></div>
+          <div><span class="label">Fuera del alcance</span><p>Diagnósticos, emergencias, patologías graves o crónicas, trastornos mentales severos y prescripción de medicamentos.</p></div>
+        </div>
+        <p style="margin-top:24px">Si alguien escribe "dolor opresivo en el pecho que no me deja respirar", Anima interrumpe la sesión y le deriva a urgencias. Las señales de alarma, los avisos claros y los límites de actuación se diseñan desde el principio, no se añaden al final.</p>
+      </div>
+      <figure class="img-right"><button type="button" data-full="img/anima/mvp.jpg" aria-label="Ampliar imagen"><img src="img/anima/mvp.jpg" alt="Funcionalidades del MVP de Anima con el chatbot en un móvil" loading="lazy"></button><figcaption>Funcionalidades del MVP: chatbot empático, análisis de síntomas, autocuidado, alarmas y derivación.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">03</div><span class="label">Planificación</span></div>
+      <div class="body">
+        <h2>15 meses, 6 fases y una metodología híbrida</h2>
+        <p>Descompuse el proyecto con una EDT y estimé cada actividad con PERT a partir de escenarios optimista, realista y pesimista. Elegí una metodología híbrida según el tipo de trabajo:</p>
+        <ul class="list">
+          <li><b>Cascada en inicio, planificación y diseño.</b> Alcance, requisitos, legal y arquitectura necesitan estar cerrados antes de construir.</li>
+          <li><b>Ágil en el desarrollo del MVP.</b> Siete sprints de un mes, cada uno con desarrollo, pruebas técnicas, test de precisión de la IA, validación médica y prueba de empatía con usuarios.</li>
+          <li><b>Cascada de nuevo en lanzamiento y cierre.</b> Publicación, métricas iniciales, evaluación de objetivos y lecciones aprendidas.</li>
+        </ul>
+      </div>
+      <figure class="img-wide"><button type="button" data-full="img/anima/edt.jpg" aria-label="Ampliar EDT"><img src="img/anima/edt.jpg" alt="Estructura de desglose del trabajo de Anima" loading="lazy"></button><figcaption>EDT: estructura de desglose del trabajo.</figcaption></figure>
+      <div class="gantt-wrap">
+        <div class="gantt" role="table" aria-label="Cronograma de 15 meses">
+          <div class="gh" role="row"><span role="columnheader">Fase</span><span role="columnheader">M1</span><span role="columnheader">M2</span><span role="columnheader">M3</span><span role="columnheader">M4</span><span role="columnheader">M5</span><span role="columnheader">M6</span><span role="columnheader">M7</span><span role="columnheader">M8</span><span role="columnheader">M9</span><span role="columnheader">M10</span><span role="columnheader">M11</span><span role="columnheader">M12</span><span role="columnheader">M13</span><span role="columnheader">M14</span><span role="columnheader">M15</span></div>
+          <div class="gr" role="row"><span role="cell">1 · Inicio <small>Cascada</small></span><i style="--s:1;--e:2"></i></div>
+          <div class="gr" role="row"><span role="cell">2 · Planificación <small>Cascada</small></span><i style="--s:2;--e:4"></i></div>
+          <div class="gr" role="row"><span role="cell">3 · Diseño conceptual y técnico <small>Cascada</small></span><i style="--s:4;--e:7"></i></div>
+          <div class="gr agile" role="row"><span role="cell">4 · Desarrollo del MVP <small>Ágil · 7 sprints</small></span><i style="--s:7;--e:14" class="sprints"><b></b><b></b><b></b><b></b><b></b><b></b><b></b></i></div>
+          <div class="gr" role="row"><span role="cell">5 · Lanzamiento <small>Cascada</small></span><i style="--s:14;--e:15"></i></div>
+          <div class="gr" role="row"><span role="cell">6 · Cierre <small>Cascada</small></span><i style="--s:15;--e:16"></i></div>
+        </div>
+      </div>
+      <div class="body2">
+        <h3>Lo que me dijo el PERT</h3>
+        <p>La suma de tiempos esperados daba <strong>17,4 meses</strong>, por encima de los 15 planificados. Las actividades que más se podían alargar eran el chatbot, la base de datos médica y la parte legal. En lugar de ignorarlo, lo usé para decidir dónde aplicar sprints cortos con feedback continuo, y dejé el avatar 3D y la biometría como funcionalidades que pueden pasar a futuribles si el calendario se aprieta.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">04</div><span class="label">Objetivos</span></div>
+      <div class="body">
+        <h2>Objetivos medibles y alineados</h2>
+        <p>Definí cuatro objetivos SMART y los alineé con el trabajo del proyecto mediante un Hoshin Kanri: directriz, estrategia, proyecto y actividad. Los traduje en una matriz de 17 requisitos (11 funcionales y 6 no funcionales), cada uno con responsable y prioridad.</p>
+        <div class="nums">
+          <div><b>−20%</b><span>consultas médicas innecesarias en 2 años</span></div>
+          <div><b>−30%</b><span>ansiedad ante síntomas leves en 15 meses</span></div>
+          <div><b>90%</b><span>precisión en la clasificación de síntomas, validada por médicos</span></div>
+          <div><b>70%</b><span>de usuarios con mejora percibida de su bienestar</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">05</div><span class="label">Riesgos</span></div>
+      <div class="body">
+        <h2>Riesgos priorizados por probabilidad e impacto</h2>
+        <p>Puntué cada riesgo del 1 al 5 en probabilidad e impacto y asigné una estrategia a los más altos. El mayor riesgo no era técnico: que el usuario confunda una orientación con un diagnóstico.</p>
+        <div class="risk">
+          <div class="matrix" aria-label="Matriz de probabilidad e impacto">
+            <span class="ax-y">Impacto →</span>
+            <div class="cells">
+              <div style="--x:2;--y:5" class="hi">R1 R2 R6</div>
+              <div style="--x:4;--y:4" class="hi top">R3</div>
+              <div style="--x:3;--y:3" class="mid">R4</div>
+              <div style="--x:3;--y:2" class="lo">R5</div>
+            </div>
+            <span class="ax-x">Probabilidad →</span>
+          </div>
+          <div class="tw">
+            <table class="t">
+              <thead><tr><th>Riesgo</th><th>Estrategia</th><th>P×I</th></tr></thead>
+              <tbody>
+                <tr><td><b>R3</b> El usuario confunde orientación con diagnóstico</td><td>Mitigar: avisos constantes y protocolo de interrupción</td><td>16</td></tr>
+                <tr><td><b>R1</b> Brecha de datos personales y biométricos</td><td>Mitigar: cifrado y auditoría mensual</td><td>10</td></tr>
+                <tr><td><b>R2</b> La IA clasifica mal los síntomas</td><td>Mitigar: validación médica continua</td><td>10</td></tr>
+                <tr><td><b>R6</b> Cambios en la regulación de salud digital</td><td>Evitar: asesor legal desde el inicio</td><td>10</td></tr>
+                <tr><td><b>R4</b> Incompatibilidad con wearables</td><td>Transferir: acuerdos con fabricantes</td><td>9</td></tr>
+                <tr><td><b>R5</b> Escepticismo ante la medicina holística</td><td>Aceptar y vigilar</td><td>6</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">06</div><span class="label">Calidad</span></div>
+      <div class="body">
+        <h2>Calidad técnica, médica y humana</h2>
+        <p>En Anima la calidad no es solo que funcione: también que sea segura y que acompañe bien. Definí una matriz de KPIs y mecanismos para prevenir errores antes de que ocurran: auditorías médicas periódicas, revisiones del lenguaje de la IA con un psicólogo e integración continua en el código.</p>
+        <div class="tw">
+          <table class="t">
+            <thead><tr><th>Factor</th><th>KPI</th><th>Objetivo</th></tr></thead>
+            <tbody>
+              <tr><td>Precisión médica</td><td>Acierto en la clasificación de síntomas</td><td>≥ 90%</td></tr>
+              <tr><td>Seguridad</td><td>Brechas de datos de usuarios</td><td>0</td></tr>
+              <tr><td>Empatía</td><td>Usuarios que perciben mejora en su bienestar</td><td>≥ 70%</td></tr>
+              <tr><td>Desempeño</td><td>Tiempo de respuesta del chatbot</td><td>&lt; 2 s</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Un ciclo PDCA de ejemplo</h3>
+        <ul class="list">
+          <li><b>Plan.</b> Detecto que en salud emocional la satisfacción no llega al 70%.</li>
+          <li><b>Do.</b> El psicólogo y el ingeniero de IA ajustan el tono del chatbot para hacerlo más cálido.</li>
+          <li><b>Check.</b> Repito las encuestas de bienestar durante una semana.</li>
+          <li><b>Act.</b> Si los datos mejoran, el nuevo tono pasa a toda la app.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">07</div><span class="label">Costes</span></div>
+      <div class="body">
+        <h2>306.900 € para un MVP realista</h2>
+        <p>Mi primera estimación fue de 223.300 €. Al estudiar el mercado con más profundidad la subí un 37%, por tres motivos: una IA con lenguaje empático necesita ingenieros senior, la validación clínica con médicos y psicólogos debe ser sólida, y tratar datos biométricos y de salud hace más complejo el cumplimiento legal. Lo desglosé con una CBS:</p>
+        <div class="bars">
+          <div class="bar"><span>Desarrollo fullstack</span><i style="--v:65"></i><b>65.000 €</b></div>
+          <div class="bar"><span>IA conversacional empática</span><i style="--v:55"></i><b>55.000 €</b></div>
+          <div class="bar"><span>Dirección del proyecto</span><i style="--v:45"></i><b>45.000 €</b></div>
+          <div class="bar"><span>Asesoría médica y psicológica</span><i style="--v:30"></i><b>30.000 €</b></div>
+          <div class="bar"><span>Marketing y relaciones públicas</span><i style="--v:25"></i><b>25.000 €</b></div>
+          <div class="bar"><span>UX/UI y branding</span><i style="--v:15"></i><b>15.000 €</b></div>
+          <div class="bar"><span>Integración biométrica</span><i style="--v:15"></i><b>15.000 €</b></div>
+          <div class="bar"><span>Modelado 3D</span><i style="--v:12"></i><b>12.000 €</b></div>
+          <div class="bar"><span>Legal, ética y privacidad</span><i style="--v:12"></i><b>12.000 €</b></div>
+          <div class="bar"><span>Gastos operativos</span><i style="--v:5"></i><b>5.000 €</b></div>
+          <div class="bar"><span>Subtotal</span><i style="--v:0"></i><b>279.000 €</b></div>
+          <div class="bar"><span>Contingencia (10%)</span><i style="--v:0"></i><b>27.900 €</b></div>
+          <div class="bar total"><span>Presupuesto total</span><i style="--v:0"></i><b>306.900 €</b></div>
+        </div>
+        <p style="margin-top:20px">También dejé preparada una alternativa para no salirse del presupuesto inicial: un MVP con menos patologías y el avatar 3D y los wearables en una segunda fase.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">08</div><span class="label">Cierre</span></div>
+      <div class="body">
+        <h2>Presentación y siguientes pasos</h2>
+        <p>Presenté el proyecto en un pitch que terminaba con una pregunta al público: ¿a quién acudís cuando no os encontráis bien? Como futuribles quedan la biometría avanzada, un avatar 3D interactivo, el análisis por imagen y los wearables, y una decisión estratégica abierta: aliarse con la sanidad pública o buscar inversión privada.</p>
+        <h3>Qué aprendí</h3>
+        <ul class="list">
+          <li>Estimar costes sin datos reales da cifras optimistas. Revisar el presupuesto con investigación de mercado lo cambió un 37%.</li>
+          <li>El PERT sirve para tomar decisiones, no solo para calcular: me mostró dónde necesitaba metodología ágil.</li>
+          <li>En un producto de IA para salud, definir lo que queda fuera del alcance es tan importante como las funcionalidades.</li>
+        </ul>
+      </div>
+      <div class="duo">
+        <figure><button type="button" data-full="img/anima/objetivos.jpg" aria-label="Ampliar imagen"><img src="img/anima/objetivos.jpg" alt="Diapositiva de objetivos y fases" loading="lazy"></button><figcaption>Objetivos y peso de cada fase en el calendario.</figcaption></figure>
+        <figure><button type="button" data-full="img/anima/riesgos.jpg" aria-label="Ampliar imagen"><img src="img/anima/riesgos.jpg" alt="Diapositiva de riesgos, calidad y costes" loading="lazy"></button><figcaption>Riesgos, calidad y costes en la presentación.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="g next">
+      <span class="label">Siguiente proyecto</span>
+      <a href="#luminaiot">Lumina<em>IoT</em> →</a>
+    </section>
+  </div>
+</main>
+
+<!-- ================= LUMINAIOT ================= -->
+<main class="view" id="v-luminaiot">
+  <section class="p-hero wrap">
+    <div class="g">
+      <a class="back" href="#proyectos">← Proyectos</a>
+      <h1>Lumina<em>IoT</em></h1>
+      <p class="lead">Una plataforma para gestionar redes eléctricas inteligentes: monitorizar el consumo, detectar incidencias en tiempo real con sensores IoT y optimizar la distribución de energía. Recorrí el ciclo de vida del software de principio a fin, desde las peticiones de los stakeholders hasta un sprint diseñado, modelado y programado.</p>
+    </div>
+    <div class="g facts">
+      <div><span class="label">Contexto</span>Unit 7 · Software Development Lifecycles, Computer Science &amp; IA, MSMK</div>
+      <div><span class="label">Año</span>2026</div>
+      <div><span class="label">Rol</span>Proyecto individual: análisis, planificación Scrum y desarrollo del Sprint 2</div>
+      <div><span class="label">Herramientas</span><ul><li>ScrumDesk</li><li>Figma Make (IA) y Draw.io</li><li>Python</li><li>MySQL Workbench</li></ul></div>
+    </div>
+    <div class="ciclo" aria-label="Fases del ciclo de vida recorridas">
+      <span>Requisitos</span><span>Backlog</span><span>Priorización</span><span>Sprints</span><span>Interfaz</span><span>UML</span><span>Base de datos</span><span>Código</span>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="g block rv">
+      <div class="side"><div class="num">01</div><span class="label">Stakeholders</span></div>
+      <div class="body">
+        <h2>Siete perfiles, siete necesidades distintas</h2>
+        <p>El punto de partida fueron las peticiones de siete stakeholders de una compañía energética, cada uno con su propio objetivo:</p>
+        <div class="chips">
+          <span>Director general · visión global</span><span>CTO · integración IoT y escalabilidad</span><span>Operaciones · fallos en la red</span><span>Analista de datos · patrones e informes</span><span>Técnico de campo · app móvil</span><span>Finanzas · costes</span><span>Ciudadano · su propio consumo</span>
+        </div>
+        <p style="margin-top:24px">Sus frases no venían listas para desarrollar. "Necesitamos una plataforma que monitorice el consumo, detecte incidencias y optimice la distribución" eran en realidad tres historias distintas, y "el sistema debe ser altamente fiable" no era una funcionalidad sino un requisito no funcional. Separar unas cosas de otras fue el primer trabajo de análisis.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">02</div><span class="label">Requisitos</span></div>
+      <div class="body">
+        <h2>De las peticiones al backlog</h2>
+        <p>Escribí cada necesidad como historia de usuario con criterios de aceptación en formato <em>Given / When / Then</em>, la traduje a requisitos con su fuente y sus dependencias y la agrupé en épicas.</p>
+        <div class="nums">
+          <div><b>16</b><span>historias de usuario con criterios de aceptación</span></div>
+          <div><b>22</b><span>requisitos funcionales con dependencias</span></div>
+          <div><b>8</b><span>requisitos no funcionales</span></div>
+          <div><b>7</b><span>épicas, de la monitorización a la seguridad</span></div>
+        </div>
+        <div class="story">
+          <div class="story-front"><span class="label">Historia de usuario · Visualizar incidencias en la app</span><p>Como <b>técnico de campo</b>, quiero <b>recibir las incidencias en una app móvil</b> para <b>intervenir rápidamente</b>.</p></div>
+          <div class="story-back"><span class="label">Criterio de aceptación</span>
+            <p><b>Dado que</b> existen incidencias registradas y el técnico accede a la app,<br><b>cuando</b> navega al apartado de incidencias,<br><b>entonces</b> el sistema le muestra las incidencias activas.</p></div>
+        </div>
+        <p style="margin-top:24px">Algunas decisiones no eran obvias. Dudé si el funcionamiento sin conexión era un requisito funcional o no funcional, y lo clasifiqué como funcional porque describe un comportamiento del sistema: el técnico puede consultar y registrar datos en zonas rurales sin cobertura.</p>
+      </div>
+      <figure class="img-wide"><button type="button" data-full="img/lumina/backlog.jpg" aria-label="Ampliar imagen"><img src="img/lumina/backlog.jpg" alt="Backlog de LuminaIoT en ScrumDesk organizado por épicas" loading="lazy"></button><figcaption>Backlog en ScrumDesk: historias de usuario agrupadas en épicas, con su esfuerzo.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">03</div><span class="label">Priorización</span></div>
+      <div class="body">
+        <h2>MoSCoW, Fibonacci y cuatro sprints</h2>
+        <p>Prioricé cada historia con MoSCoW y estimé su esfuerzo en la escala de Fibonacci (1, 2, 3, 5, 8, 13), justificando cada valor: por ejemplo, la detección en tiempo real vale 8 porque exige procesamiento en streaming, y registrar una intervención vale 3 porque es un formulario con almacenamiento. Con eso organicé el backlog en sprints que siguen el orden de las dependencias.</p>
+      </div>
+      <div class="sprints-plan">
+        <div><span class="label">Sprint 1 · 21 pts</span><h3>Cimientos y MVP</h3><ul><li>Integrar sensores IoT <i>M · 8</i></li><li>Monitorizar consumo <i>M · 5</i></li><li>Detectar incidencias <i>M · 5</i></li><li>Consultar consumo <i>M · 3</i></li></ul></div>
+        <div class="sel"><span class="label">Sprint 2 · 21 pts · el que desarrollé</span><h3>Operaciones en tiempo real</h3><ul><li>Detectar en tiempo real <i>M · 8</i></li><li><b>Visualizar incidencias en la app</b> <i>M · 5</i></li><li><b>Registrar intervenciones</b> <i>M · 3</i></li><li>Recibir alertas <i>S · 5</i></li></ul></div>
+        <div><span class="label">Sprint 3 · 26 pts</span><h3>Análisis e inteligencia</h3><ul><li>Analizar consumo <i>S · 5</i></li><li>Generar informes <i>S · 5</i></li><li>Optimizar distribución <i>S · 8</i></li><li>Predecir fallos <i>S · 8</i></li></ul></div>
+        <div><span class="label">Sprint 4 · 23 pts</span><h3>Mejoras avanzadas</h3><ul><li>Funcionar sin conexión <i>S · 8</i></li><li>Sincronizar datos <i>S · 5</i></li><li>Informes económicos <i>C · 5</i></li><li>Optimizar consumo en casa <i>C · 5</i></li></ul></div>
+      </div>
+      <div class="body2">
+        <h3>Por qué el Sprint 2</h3>
+        <p>En un contexto profesional empezaría por el Sprint 1, porque todo lo demás depende de sus datos. Para desarrollarlo yo elegí el Sprint 2: aporta valor directo a los técnicos de campo y sus historias, de 3 y 5 puntos, eran viables con mis conocimientos y el tiempo de entrega. Descarté a propósito el streaming de datos y el machine learning de otros sprints porque disparaban la complejidad y el riesgo.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">04</div><span class="label">Interfaz</span></div>
+      <div class="body">
+        <h2>Del boceto al prototipo, con IA como apoyo</h2>
+        <p>Definí primero qué tenía que conseguir la pantalla: identificar las incidencias críticas de un vistazo, ver ubicación y prioridad, y minimizar clics y carga cognitiva para alguien que trabaja en la calle. De ahí salieron un buscador grande, filtros táctiles (urgentes, asignadas, pendientes, hoy) y tarjetas con código de color por prioridad.</p>
+        <p>Hice el boceto a mano y después usé IA en cadena: le pedí a un modelo de lenguaje que convirtiera mi descripción en un prompt optimizado para Figma Make, generé el prototipo visual y lo retoqué. Así pasé de la idea a un prototipo navegable en muy poco tiempo, manteniendo yo las decisiones de diseño.</p>
+      </div>
+      <div class="phones">
+        <figure><button type="button" data-full="img/lumina/boceto.jpg" aria-label="Ampliar boceto"><img src="img/lumina/boceto.jpg" alt="Boceto de fidelidad media de la pantalla de incidencias" loading="lazy"></button><figcaption>Boceto de fidelidad media</figcaption></figure>
+        <figure><button type="button" data-full="img/lumina/ui-incidencias.jpg" aria-label="Ampliar pantalla"><img src="img/lumina/ui-incidencias.jpg" alt="Prototipo de la pantalla de incidencias" loading="lazy"></button><figcaption>Incidencias</figcaption></figure>
+        <figure><button type="button" data-full="img/lumina/ui-registro-1.jpg" aria-label="Ampliar pantalla"><img src="img/lumina/ui-registro-1.jpg" alt="Prototipo del registro de intervención" loading="lazy"></button><figcaption>Registrar intervención</figcaption></figure>
+        <figure><button type="button" data-full="img/lumina/ui-registro-2.jpg" aria-label="Ampliar pantalla"><img src="img/lumina/ui-registro-2.jpg" alt="Prototipo del cierre de la intervención" loading="lazy"></button><figcaption>Estado final y evidencias</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">05</div><span class="label">Modelado UML</span></div>
+      <div class="body">
+        <h2>Casos de uso y clases</h2>
+        <p>Extraje actores, entidades y acciones de los sustantivos y verbos de cada historia. En los diagramas de casos de uso, iniciar sesión es un <em>include</em>, porque sin autenticarse no se pueden ver incidencias, y buscar o filtrar son <em>extend</em>, porque son opcionales. Especifiqué cada caso con su flujo principal y sus excepciones.</p>
+        <div class="tw">
+          <table class="t">
+            <thead><tr><th>CU-01 Visualizar incidencias</th><th>Excepción</th></tr></thead>
+            <tbody>
+              <tr><td>1. El técnico abre la app e inicia sesión (CU-02)</td><td>Credenciales incorrectas: aviso de error</td></tr>
+              <tr><td>2. Navega al apartado de incidencias</td><td>—</td></tr>
+              <tr><td>3. El sistema consulta las incidencias activas asignadas</td><td>Sin incidencias: mensaje informativo · Fallo de conexión: error de red</td></tr>
+              <tr><td>4. El sistema muestra el listado</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="duo">
+        <figure><button type="button" data-full="img/lumina/cu-incidencias.jpg" aria-label="Ampliar diagrama"><img src="img/lumina/cu-incidencias.jpg" alt="Diagrama de casos de uso de visualizar incidencias" loading="lazy"></button><figcaption>Casos de uso: visualizar incidencias.</figcaption></figure>
+        <figure><button type="button" data-full="img/lumina/cu-registro.jpg" aria-label="Ampliar diagrama"><img src="img/lumina/cu-registro.jpg" alt="Diagrama de casos de uso de registrar intervención" loading="lazy"></button><figcaption>Casos de uso: registrar intervención.</figcaption></figure>
+      </div>
+      <figure class="img-right"><button type="button" data-full="img/lumina/clases.jpg" aria-label="Ampliar diagrama"><img src="img/lumina/clases.jpg" alt="Diagrama de clases con TecnicoCampo, Incidencia e Intervención" loading="lazy"></button><figcaption>Diagrama de clases: TécnicoCampo, Incidencia e Intervención.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">06</div><span class="label">Datos y código</span></div>
+      <div class="body">
+        <h2>Del modelo entidad-relación a SQL y Python</h2>
+        <p>Diseñé la base de datos en tres niveles. En el conceptual, un técnico tiene asignadas de cero a muchas incidencias. En el lógico, la clave foránea va en el lado "muchos", en la tabla de incidencias, y puede ser nula porque una incidencia puede no tener técnico todavía. En el físico, lo implementé en MySQL Workbench:</p>
+<pre class="code"><code>CREATE TABLE incidencia (
+  id_incidencia  INT PRIMARY KEY AUTO_INCREMENT,
+  titulo         VARCHAR(100) NOT NULL,
+  descripcion    TEXT,
+  estado         ENUM('activa','resuelta','pendiente') NOT NULL DEFAULT 'activa',
+  prioridad      ENUM('alta','media','baja') NOT NULL,
+  fecha_creacion DATE NOT NULL,
+  ubicacion      VARCHAR(100),
+  id_tecnico     INT NULL,
+  FOREIGN KEY (id_tecnico) REFERENCES tecnico_campo(id_tecnico)
+    ON DELETE SET NULL
+);</code></pre>
+        <p style="margin-top:20px">La lógica de las dos historias está programada en Python con clases para el técnico, la incidencia y la intervención: filtrar las incidencias activas asignadas, registrar una intervención y actualizar el estado validando que sea uno de los permitidos.</p>
+      </div>
+      <figure class="img-left"><button type="button" data-full="img/lumina/mer.jpg" aria-label="Ampliar diagrama"><img src="img/lumina/mer.jpg" alt="Modelo entidad-relación" loading="lazy"></button><figcaption>Modelo entidad-relación.</figcaption></figure>
+      <div class="duo">
+        <figure><button type="button" data-full="img/lumina/python-2.jpg" aria-label="Ampliar código"><img src="img/lumina/python-2.jpg" alt="Código Python de la clase Incidencia" loading="lazy"></button><figcaption>Clase Incidencia en Python.</figcaption></figure>
+        <figure><button type="button" data-full="img/lumina/python.jpg" aria-label="Ampliar código"><img src="img/lumina/python.jpg" alt="Código Python del técnico de campo y el registro de intervenciones" loading="lazy"></button><figcaption>Técnico de campo y registro de intervenciones.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">07</div><span class="label">Aprendizajes</span></div>
+      <div class="body">
+        <h2>Lo que me llevo</h2>
+        <ul class="list">
+          <li><b>Los requisitos no llegan limpios.</b> Gran parte del trabajo está en partir peticiones ambiguas en historias claras y separar lo funcional de lo no funcional.</li>
+          <li><b>Las dependencias deciden el orden.</b> Priorizar no es solo valor: sin los datos de los sensores, nada de lo demás funciona.</li>
+          <li><b>Elegir un alcance realista también es gestión.</b> Escogí el sprint que podía entregar bien en lugar del más vistoso.</li>
+          <li><b>La IA acelera, pero no decide.</b> La usé para pasar del boceto al prototipo; los criterios de diseño y las decisiones técnicas fueron míos.</li>
+          <li><b>Pendiente de mejorar:</b> no llegué a cargar los requisitos no funcionales en ScrumDesk; es lo primero que añadiría en la siguiente iteración.</li>
+        </ul>
+      </div>
+      <figure class="img-right"><button type="button" data-full="img/lumina/sprint-board.jpg" aria-label="Ampliar imagen"><img src="img/lumina/sprint-board.jpg" alt="Tablero del Sprint 2 en ScrumDesk" loading="lazy"></button><figcaption>Tablero del Sprint 2 en ScrumDesk.</figcaption></figure>
+    </section>
+
+    <section class="g next">
+      <span class="label">Siguiente proyecto</span>
+      <a href="#autotaxi">Auto<em>Taxi</em> →</a>
+    </section>
+  </div>
+</main>
+
+<!-- ================= AUTOTAXI ================= -->
+<main class="view" id="v-autotaxi">
+  <section class="p-hero wrap">
+    <div class="g">
+      <a class="back" href="#proyectos">← Proyectos</a>
+      <span class="status-pill">En desarrollo · Noviembre 2026</span>
+      <h1>Auto<em>Taxi</em></h1>
+      <p class="lead">Un sistema de despacho de taxis autónomos: recibe solicitudes de viaje, las atiende en orden de llegada, asigna el taxi libre y calcula su ruta por un mapa con obstáculos. Lo estoy construyendo por entregas, y cada una pasa del diseño en papel a código probado.</p>
+    </div>
+    <div class="g facts">
+      <div><span class="label">Contexto</span>Unit 19 · Data Structures and Algorithms, Computer Science &amp; IA, MSMK</div>
+      <div><span class="label">Año</span>2026–27, en curso</div>
+      <div><span class="label">Rol</span>Proyecto individual: análisis, diseño de estructuras de datos e implementación</div>
+      <div><span class="label">Tecnología</span><ul><li>Python 3.10, sin librerías externas</li><li>dict y collections.deque</li><li>Git y GitHub</li></ul></div>
+    </div>
+    <div class="roadmap" aria-label="Hoja de ruta del proyecto">
+      <div class="done"><span class="label">Entrega 1 · Hecho</span><b>Análisis y diseño</b><p>Requisitos, modelo de datos, estados, ADTs, cola, pila y complejidad.</p></div>
+      <div class="done"><span class="label">Entrega 2 · Hecho</span><b>Gestor de solicitudes</b><p>Primera versión ejecutable, 8 de 8 pruebas correctas y análisis de costes.</p></div>
+      <div class="now"><span class="label">Siguiente</span><b>Flota, mapa y rutas</b><p>Taxis, validación contra el mapa, búsqueda de rutas y asignación.</p></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="g block rv">
+      <div class="side"><div class="num">01</div><span class="label">Análisis</span></div>
+      <div class="body">
+        <h2>Antes de programar, entender las reglas</h2>
+        <p>Del enunciado saqué 6 requisitos funcionales y 9 reglas de operación: las solicitudes se atienden en orden de llegada, cada taxi atiende una sola a la vez, el mapa es una matriz donde 0 es transitable y 1 un obstáculo, y los taxis solo se mueven en cuatro direcciones con coste 1.</p>
+        <p>Con eso definí cuatro entidades (Request, Taxi, Service y Map), sus estados y transiciones, y las propiedades que siempre deben cumplirse. Por ejemplo: un taxi está ocupado si y solo si tiene un servicio activo.</p>
+        <h3>Error frente a espera</h3>
+        <p>Una decisión clave fue distinguir lo que es un error de lo que solo es una espera. Un ID duplicado o una posición sobre un obstáculo se rechazan sin tocar nada. Que no haya taxis libres no es un error: la solicitud sigue primera en la cola y se reintenta cuando un taxi queda libre.</p>
+      </div>
+      <figure class="img-wide"><button type="button" data-full="img/autotaxi/relaciones.jpg" aria-label="Ampliar diagrama"><img src="img/autotaxi/relaciones.jpg" alt="Diagrama de relaciones entre Request, Service, Taxi y Map" loading="lazy"></button><figcaption>Relaciones entre entidades: Service une cada solicitud con su taxi, y Map valida todas las posiciones.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">02</div><span class="label">El mapa</span></div>
+      <div class="body">
+        <h2>Un mapa es un grafo</h2>
+        <p>Modelé el mapa como un grafo no dirigido: cada celda transitable es un vértice y cada par de celdas vecinas, en horizontal o vertical, es una arista de coste 1. Los obstáculos no generan vértices. El grafo se deduce de la matriz cuando hace falta, así no hay dos copias de los mismos datos que mantener sincronizadas. Esta es la base para la búsqueda de rutas de la siguiente entrega.</p>
+      </div>
+      <figure class="img-right"><button type="button" data-full="img/autotaxi/grafo.jpg" aria-label="Ampliar diagrama"><img src="img/autotaxi/grafo.jpg" alt="Mapa de 3 por 3 y el grafo resultante" loading="lazy"></button><figcaption>Mapa de 3 × 3 y su grafo: 7 vértices y 8 aristas.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">03</div><span class="label">Estructuras</span></div>
+      <div class="body">
+        <h2>Dos estructuras para dos necesidades</h2>
+        <p>El gestor tiene que hacer dos cosas que ninguna colección de Python resuelve bien a la vez: encontrar cualquier solicitud por su ID, también las ya atendidas, y sacar siempre la más antigua. Por eso usa dos estructuras que comparten la misma ficha de cada solicitud:</p>
+        <div class="tw">
+          <table class="t">
+            <thead><tr><th>Estructura</th><th>Guarda</th><th>Resuelve</th></tr></thead>
+            <tbody>
+              <tr><td>Diccionario <code>_registry</code></td><td>Todas las solicitudes, por ID</td><td>Consultar y evitar IDs repetidos en O(1)</td></tr>
+              <tr><td>Deque <code>_pending</code></td><td>Solo las pendientes, en orden</td><td>Sacar la más antigua en O(1)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:20px">Comparé esta opción con una lista de Python y con una lista enlazada. Con una lista, <code>pop(0)</code> cuesta O(n) porque desplaza todos los elementos; con un deque, sacar por el principio cuesta siempre O(1).</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">04</div><span class="label">Implementación</span></div>
+      <div class="body">
+        <h2>Primero comprobar, después guardar</h2>
+        <p>Al registrar, el gestor revisa todos los datos antes de modificar nada. Si algo falla, queda exactamente como estaba. Separé las reglas en su propio módulo de validación y creé una jerarquía de errores con una clase base común, para capturar cualquier fallo en un solo punto sin que el programa se detenga.</p>
+<pre class="code"><code>def enqueue(self, data: dict) -> Request:
+    # Fase 1: comprobar todo, sin modificar nada
+    check_required_fields(data)
+    request_id = validate_id(data["request_id"])
+    user = validate_user(data["user"])
+    pickup = validate_position(data["pickup"])
+    destination = validate_position(data["destination"])
+    if request_id in self._registry:
+        raise DuplicateIdError(f"Ya existe una solicitud con ID {request_id}")
+
+    # Fase 2: crear la solicitud y guardarla
+    request = Request(request_id, user, pickup, destination,
+                      arrival_order=self._next_order)
+    self._next_order += 1
+    self._registry[request_id] = request
+    self._pending.append(request)
+    return request</code></pre>
+        <h3>Lo que cambió al programarlo</h3>
+        <ul class="list">
+          <li><b>IDs normalizados.</b> Para el ordenador "R-0001" y "r-0001" son distintos, así que la comprobación de duplicados dejaba pasar el segundo. Ahora limpio espacios y paso a mayúsculas antes de comparar.</li>
+          <li><b>Validación en un módulo propio.</b> En el diseño estaba dentro de <code>enqueue</code>; al ver que la misma regla se usa en recogida y destino, la separé para escribirla y probarla una sola vez.</li>
+          <li><b>Número de llegada.</b> Cada solicitud recibe 1, 2, 3… para que el orden FIFO se vea a simple vista.</li>
+          <li><b>No borrar al atender.</b> Extraer saca la solicitud de pendientes, pero la conserva en el registro con su estado y su hora: el historial del día no se pierde.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">05</div><span class="label">Pruebas</span></div>
+      <div class="body">
+        <h2>8 de 8 pruebas correctas</h2>
+        <p>Probé los seis casos del enunciado, incluidos los que deben fallar: ID duplicado, consulta de un ID inexistente, extracción con la cola vacía, campos que faltan y coordenadas mal formadas. En cada error compruebo también que no se ha guardado nada.</p>
+<pre class="code term"><code>PRUEBA 5: Estructura vacía
+  Esperado:  Termina de forma controlada con EmptyQueueError
+  Obtenido:  EmptyQueueError (No hay solicitudes pendientes). ¿Vacía? True
+  Resultado: CORRECTO
+
+PRUEBA 6b: Coordenada con un decimal
+  Entrada:   pickup (1.5, 2)
+  Esperado:  Se rechaza con InvalidPositionError y no se registra
+  Obtenido:  InvalidPositionError. Registradas: 0
+  Resultado: CORRECTO
+
+=== RESUMEN: 8 de 8 pruebas correctas ===</code></pre>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">06</div><span class="label">Costes</span></div>
+      <div class="body">
+        <h2>Cuánto cuesta cada operación</h2>
+        <p>Analicé el coste contando operaciones, no segundos, porque los segundos dependen del ordenador. Distingo el caso esperado, el peor caso, cuando muchas claves colisionan en la tabla hash, y el coste amortizado de las veces que el diccionario se agranda.</p>
+        <div class="tw">
+          <table class="t cost">
+            <thead><tr><th>Operación</th><th>Esperado</th><th>Peor caso</th><th>Amortizado</th></tr></thead>
+            <tbody>
+              <tr><td>Registrar</td><td>O(1)</td><td>O(n)</td><td>O(1)</td></tr>
+              <tr><td>Consultar por ID</td><td>O(1)</td><td>O(n)</td><td>—</td></tr>
+              <tr><td>Extraer la siguiente</td><td>O(1)</td><td>O(1)</td><td>—</td></tr>
+              <tr><td>¿Está vacía?</td><td>O(1)</td><td>O(1)</td><td>—</td></tr>
+              <tr><td>Listar pendientes</td><td>O(p)</td><td>O(p)</td><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:20px"><em>n</em> son todas las solicitudes registradas y <em>p</em> solo las pendientes. El precio del diseño es más memoria que una lista simple; a cambio, encontrar una solicitud entre miles en hora punta no depende de cuántas haya.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">07</div><span class="label">Cómo trabajo</span></div>
+      <div class="body">
+        <h2>IA como apoyo, decisiones propias</h2>
+        <p>Uso GitHub Copilot para escribir código más rápido y Claude para entender conceptos y desbloquearme cuando una estructura no funcionaba. Lo declaro en el repositorio. Las decisiones de diseño, las pruebas y su documentación son mías, y el código está comentado paso a paso para poder explicarlo.</p>
+        <p style="margin-top:28px"><a class="textlink" href="https://github.com/andreaga-pixel/autoTaxi_EI2_UNIT19">Ver el código en GitHub ↗</a></p>
+      </div>
+    </section>
+
+    <section class="g next">
+      <span class="label">Siguiente proyecto</span>
+      <a href="#nba">N<em>BA</em> →</a>
+    </section>
+  </div>
+</main>
+
+<!-- ================= NBA ================= -->
+<main class="view" id="v-nba">
+  <section class="p-hero wrap">
+    <div class="g">
+      <a class="back" href="#proyectos">← Proyectos</a>
+      <span class="status-pill">En desarrollo · Noviembre 2026</span>
+      <h1>Gestión de <em>carga</em> en la NBA</h1>
+      <p class="lead">¿Juega hoy con normalidad, con límite de minutos o descansa? Estoy construyendo una herramienta de análisis de datos para que el responsable de rendimiento de un equipo de la NBA tome esa decisión antes de cada partido, con datos públicos de la liga y argumentos que pueda defender ante el entrenador.</p>
+    </div>
+    <div class="g facts">
+      <div><span class="label">Contexto</span>Unit 17 · Data Science, Computer Science &amp; IA, MSMK</div>
+      <div><span class="label">Año</span>2026–27, en curso</div>
+      <div><span class="label">Rol</span>Proyecto individual: problema de negocio, exploración y diseño de la solución</div>
+      <div><span class="label">Herramientas</span><ul><li>Python y pandas en Jupyter</li><li>Git y GitHub, 27 commits</li><li>Power BI o Streamlit para el dashboard</li></ul></div>
+    </div>
+    <div class="roadmap" aria-label="Hoja de ruta del proyecto">
+      <div class="done"><span class="label">Entrega 1 · Hecho</span><b>Brief y exploración</b><p>Problema de negocio, hipótesis, KPIs, arquitectura y perfil de calidad del dataset.</p></div>
+      <div class="now"><span class="label">Siguiente</span><b>Limpieza y modelo de datos</b><p>Minutos, fechas y textos normalizados; tabla de hechos jugador-partido.</p></div>
+      <div><span class="label">Después</span><b>Hipótesis y dashboard</b><p>Probar H1–H3 y construir el semáforo de carga de la plantilla.</p></div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <section class="g block rv">
+      <div class="side"><div class="num">01</div><span class="label">Decisión</span></div>
+      <div class="body">
+        <h2>Empezar por la decisión, no por los datos</h2>
+        <p>Planteé el proyecto para una consultora ficticia, AGA Analytics, con los Boston Celtics como club piloto. El objetivo del club no es ganar cada partido de la temporada regular, sino llegar a los playoffs con la plantilla sana: perder un partido por un descanso cuesta poco, pero la lesión de un titular en marzo puede costar la temporada.</p>
+        <h3>Restricciones reales</h3>
+        <ul class="list">
+          <li><b>Normativa de la NBA.</b> Desde 2023 no se puede descansar a más de una estrella por partido, las estrellas deben jugar los partidos televisados y necesitan 65 partidos para optar a premios.</li>
+          <li><b>Solo datos públicos.</b> Minutos, calendario y estadísticas; nada de GPS ni datos médicos.</li>
+          <li><b>Tiempo.</b> La recomendación tiene que estar lista la víspera del partido.</li>
+          <li><b>Quién decide.</b> La herramienta recomienda; el entrenador decide.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">02</div><span class="label">Dataset</span></div>
+      <div class="body">
+        <h2>1,67 millones de filas por explorar</h2>
+        <p>Trabajo con el dataset público de box scores de la NBA en Kaggle (licencia CC0, datos originales de NBA.com). Cada fila es un jugador en un partido. Uso las temporadas desde 2015-16 y comprobé que no hay ninguna pareja jugador-partido repetida.</p>
+        <div class="nums">
+          <div><b>1,67M</b><span>filas en las estadísticas por jugador, 40 columnas</span></div>
+          <div><b>396.530</b><span>filas en mi ventana, desde la temporada 2015-16</span></div>
+          <div><b>4</b><span>tablas unidas: jugadores, partidos, equipos y estadísticas</span></div>
+          <div><b>0</b><span>duplicados jugador-partido</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">03</div><span class="label">Exploración</span></div>
+      <div class="body">
+        <h2>Lo que encontré al perfilar los datos</h2>
+        <p>Antes de analizar nada, hice un perfil de calidad de las cuatro tablas en un notebook: tamaño, tipos, nulos, valores distintos y cobertura de fechas. Cada hallazgo me obligó a hacerme una pregunta nueva.</p>
+
+        <h3>¿Por qué faltan minutos?</h3>
+        <p>El 10 % de las filas no tiene minutos. Crucé esos nulos con la columna de comentarios y vi que en el 89 % de los casos el jugador simplemente no jugó. No son datos perdidos: son justo las ausencias que necesito medir.</p>
+        <div class="stack" role="img" aria-label="De 168.636 filas sin minutos, 150.189 tienen comentario de ausencia y 18.447 no tienen comentario">
+          <div style="--w:89.06" class="a"><span>150.189 · no jugó, con motivo</span></div>
+          <div style="--w:10.94" class="b"><span>18.447</span></div>
+        </div>
+        <p class="note">168.636 filas sin minutos. Los 18.447 nulos reales son el 3,7 % de mi ventana, y más de la mitad son de pretemporada, que excluyo.</p>
+
+        <h3>El descanso casi no se registra</h3>
+        <p>Solo 418 ausencias se etiquetan como descanso, frente a 120.262 "Coach's Decision". Y al contarlas por año aparece algo que no esperaba: tras el pico de 2016, la etiqueta cae a partir de 2018, coincidiendo con la normativa de la NBA contra el descanso de estrellas. <strong>Cómo se registra un dato depende de las reglas de la liga.</strong></p>
+        <div class="yearbars" role="img" aria-label="Ausencias etiquetadas como descanso por año, de 2004 a 2026, con pico de 86 en 2016">
+          <div style="--v:1"><i></i><span>04</span></div><div style="--v:0"><i></i><span>05</span></div><div style="--v:0"><i></i><span>06</span></div><div style="--v:1"><i></i><span>07</span></div><div style="--v:0"><i></i><span>08</span></div><div style="--v:8"><i></i><span>09</span></div><div style="--v:4"><i></i><span>10</span></div><div style="--v:3"><i></i><span>11</span></div><div style="--v:14"><i></i><span>12</span></div><div style="--v:7"><i></i><span>13</span></div><div style="--v:31"><i></i><span>14</span></div><div style="--v:42"><i></i><span>15</span></div><div style="--v:86" class="peak"><i><b>86</b></i><span>16</span></div><div style="--v:56"><i></i><span>17</span></div><div style="--v:25"><i></i><span>18</span></div><div style="--v:14"><i></i><span>19</span></div><div style="--v:5"><i></i><span>20</span></div><div style="--v:38"><i></i><span>21</span></div><div style="--v:0"><i></i><span>22</span></div><div style="--v:7"><i></i><span>23</span></div><div style="--v:7"><i></i><span>24</span></div><div style="--v:48"><i></i><span>25</span></div><div style="--v:21"><i></i><span>26</span></div>
+        </div>
+        <p class="note">Ausencias con la palabra "rest" en el comentario, por año natural. 2026 llega hasta junio.</p>
+
+        <h3>Otros problemas de calidad</h3>
+        <div class="tw">
+          <table class="t">
+            <thead><tr><th>Problema</th><th>Cómo lo trato</th></tr></thead>
+            <tbody>
+              <tr><td>Los minutos se leen como texto: 2.097 filas usan el formato <code>mm:ss</code></td><td>Convertirlos a minutos decimales sin eliminar filas</td></tr>
+              <tr><td>7.891 variantes de texto en los comentarios de ausencia</td><td>Normalizar y clasificar: lesión, decisión técnica, descanso</td></tr>
+              <tr><td>El mismo tipo de partido escrito de varias formas ("Preseason", "Pre Season")</td><td>Unificar y quedarme solo con partidos oficiales</td></tr>
+              <tr><td>Al 10,4 % de los jugadores recientes le falta la fecha de nacimiento</td><td>Comprobé que son solo el 0,2 % de las filas: impacto bajo</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">04</div><span class="label">Hipótesis</span></div>
+      <div class="body">
+        <h2>Tres hipótesis, ordenadas por valor</h2>
+        <ul class="list hyp">
+          <li><span class="label">H1 · Prioridad alta</span><b>La carga acumulada aumenta el riesgo de lesión.</b> Los jugadores con más minutos en los 14 días previos se pierden más partidos por lesión en las dos semanas siguientes.</li>
+          <li><span class="label">H2 · Prioridad media</span><b>El rendimiento cae en el segundo partido de un back-to-back, sobre todo en veteranos.</b> Lo mediré con el True Shooting % del mismo jugador con 0 días de descanso frente a 2 o más.</li>
+          <li><span class="label">H3 · Prioridad media</span><b>Descansar a un titular cuesta poco contra rivales débiles.</b> Compararé el % de victorias según el nivel del rival y la ausencia de un titular.</li>
+        </ul>
+        <p style="margin-top:20px">H1 va primero porque anticipar una lesión es el objetivo principal del departamento. H2 y H3 ayudan a decidir cuándo y cómo descansar, pero solo importan si descansar evita algo. Para cada hipótesis dejé escrito qué haría la herramienta si se cumple y si no.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">05</div><span class="label">KPIs</span></div>
+      <div class="body">
+        <h2>Un semáforo que compara a cada jugador consigo mismo</h2>
+        <p>El responsable de rendimiento tiene que revisar la plantilla en pocos minutos, así que la carga no se muestra como un número, sino como un semáforo junto a cada jugador. La clave es el umbral: si fuera común, una estrella que siempre juega 35 minutos estaría siempre en rojo y un suplente nunca. Por eso cada jugador se compara con su propio historial.</p>
+        <div class="lights">
+          <div class="l-g"><i></i><b>Verde</b><span>Carga de 14 días por debajo del 60 % de su historial. Juega con normalidad.</span></div>
+          <div class="l-a"><i></i><b>Ámbar</b><span>Entre el 60 % y el 80 %. Vigilar y reducir la carga en el entrenamiento.</span></div>
+          <div class="l-r"><i></i><b>Rojo</b><span>Por encima del 80 %. Proponer al entrenador un límite de minutos o un descanso.</span></div>
+        </div>
+        <h3>KPIs en tensión</h3>
+        <p>Los indicadores tiran en direcciones opuestas. Descansar más reduce las lesiones, pero puede bajar el % de victorias y la disponibilidad, y la liga exige que las estrellas jueguen. El objetivo no es maximizar un KPI, sino mantener la carga controlada sin bajar de la disponibilidad mínima (≥ 85 % de los titulares) y concentrar los descansos donde menos cuestan.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">06</div><span class="label">Arquitectura</span></div>
+      <div class="body">
+        <h2>De Kaggle a una recomendación la víspera del partido</h2>
+        <p>Diseñé la solución como un motor analítico con dashboard: un panel solo mostraría datos, y el responsable necesita una recomendación que pueda defender.</p>
+      </div>
+      <div class="pipeline" aria-label="Arquitectura de la solución">
+        <div><span class="label">Fuente</span><b>Kaggle</b><p>CSV, actualización diaria</p></div>
+        <div><span class="label">Ingesta</span><b>Python</b><p>Descarga sin modificar a data/raw</p></div>
+        <div><span class="label">Limpieza</span><b>pandas</b><p>Tipos, nulos, minutos y textos</p></div>
+        <div><span class="label">Modelo</span><b>Parquet</b><p>Hechos jugador-partido y dimensiones</p></div>
+        <div><span class="label">Motor</span><b>pandas, scikit-learn</b><p>Carga, descansos y semáforo</p></div>
+        <div><span class="label">Dashboard</span><b>Power BI o Streamlit</b><p>Plantilla con semáforo y detalle</p></div>
+      </div>
+      <div class="body2">
+        <h3>Riesgos que ya tengo identificados</h3>
+        <ul class="list">
+          <li><b>Una sola fuente.</b> Si el autor del dataset deja de actualizarlo, la alternativa es NBA.com, la fuente original.</li>
+          <li><b>Clasificar mal las ausencias.</b> Con 7.891 variantes de texto, un error al detectar lesiones afectaría directamente a H1.</li>
+          <li><b>Datos de salud.</b> Deducir lesiones de personas identificables es información sensible según el RGPD: la herramienta es solo para el cuidado de los jugadores dentro del club.</li>
+          <li><b>Correlación no es causa.</b> Los entrenadores ya descansan a quien ven cansado, así que los datos muestran asociaciones. Por eso la herramienta recomienda y no ordena.</li>
+        </ul>
+        <p style="margin-top:28px"><a class="textlink" href="https://github.com/andreaga-pixel/NBA-dsci-AGA">Ver el brief y el notebook en GitHub ↗</a></p>
+      </div>
+    </section>
+
+    <section class="g next">
+      <span class="label">Siguiente proyecto</span>
+      <a href="#djenice">Djenice Duarte <em>Photo</em> →</a>
+    </section>
+  </div>
+</main>
+
+<!-- ================= DJENICE ================= -->
+<main class="view" id="v-djenice">
+  <section class="p-hero wrap">
+    <div class="g">
+      <a class="back" href="#proyectos">← Proyectos</a>
+      <h1>Djenice Duarte <em>Photo</em></h1>
+      <p class="lead">Un proyecto de tiempo libre. Mi amiga Djenice, fotógrafa, necesitaba un portfolio sencillo para enseñar su trabajo, y se lo diseñé en una tarde con Figma y Framer. Lo incluyo porque muestra algo que me define: disfruto jugando con herramientas nuevas e investigando hasta dónde puedo llevarlas.</p>
+    </div>
+    <div class="g facts">
+      <div><span class="label">Contexto</span>Proyecto de tiempo libre para una amiga fotógrafa</div>
+      <div><span class="label">Año y tiempo</span>2026 · una tarde</div>
+      <div><span class="label">Rol</span>Proyecto individual: estructura, diseño y prototipo</div>
+      <div><span class="label">Herramientas</span><ul><li>Figma</li><li>Framer</li></ul></div>
+    </div>
+    <figure class="full video-fig">
+      <video src="media/djenice-prototipo.mp4" poster="img/djenice/hero.jpg" controls muted playsinline preload="metadata" aria-label="Grabación del prototipo navegable"></video>
+      <figcaption>Recorrido por el prototipo: portada, Fashion, una serie, Beauty y About me.</figcaption>
+    </figure>
+  </section>
+
+  <div class="wrap">
+    <section class="g block rv">
+      <div class="side"><div class="num">01</div><span class="label">La idea</span></div>
+      <div class="body">
+        <h2>Una carta de presentación hecha de imágenes</h2>
+        <p>Djenice empezó como modelo y esa experiencia le dio una mirada muy entrenada para la imagen, el estilo y la identidad. Hoy fotografía moda, belleza y proyectos conceptuales, y necesitaba un sitio sencillo donde enseñarlo.</p>
+        <p>El objetivo era claro: que la web no compitiera con las fotos. Todo lo que añadiera ruido, como colores, adornos o textos largos, restaba protagonismo a su trabajo.</p>
+        <h3>Por qué está aquí</h3>
+        <p>No es un proyecto de clase ni un encargo profesional. Es lo que hago cuando tengo una tarde libre: probar herramientas, ver qué permiten y construir algo útil para alguien. Ese impulso de experimentar es el mismo que quiero llevar a un laboratorio de innovación.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">02</div><span class="label">Arquitectura</span></div>
+      <div class="body">
+        <h2>Organizar el trabajo como lo piensa ella</h2>
+        <p>Estructuré la web según cómo Djenice agrupa su propio trabajo: tres categorías y, dentro de cada una, series con nombre propio. Así quien visita puede ir de lo general a lo concreto en dos clics y siempre sabe dónde está.</p>
+      </div>
+      <div class="sitemap" aria-label="Mapa del sitio">
+        <div class="root">Djenice Duarte Photo</div>
+        <div class="branches">
+          <div><b>Fashion</b><span>Eva Modern, Dilsa, Reflexo…</span></div>
+          <div><b>Beauty</b><span>Breathless, Grey, La Belle, Cristal…</span></div>
+          <div><b>Conceptual</b><span>Series de autor</span></div>
+          <div><b>About me</b><span>Biografía, experiencia, formación y contacto</span></div>
+        </div>
+      </div>
+      <div class="duo">
+        <figure><button type="button" data-full="img/djenice/fashion.jpg" aria-label="Ampliar imagen"><img src="img/djenice/fashion.jpg" alt="Página de Fashion con una serie destacada y la cuadrícula de series" loading="lazy"></button><figcaption>Fashion: una serie destacada y la cuadrícula del resto, cada una con su nombre.</figcaption></figure>
+        <figure><button type="button" data-full="img/djenice/beauty.jpg" aria-label="Ampliar imagen"><img src="img/djenice/beauty.jpg" alt="Página de Beauty con un carrusel de series" loading="lazy"></button><figcaption>Beauty: las series en un carrusel horizontal.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">03</div><span class="label">Diseño</span></div>
+      <div class="body">
+        <h2>Que la fotografía sea lo único que suene</h2>
+        <ul class="list">
+          <li><b>Un fondo blanco y casi sin color.</b> La paleta la ponen las fotos: el rojo de Eva Modern o el naranja de una serie de moda destacan más sobre blanco.</li>
+          <li><b>Tipografía condensada en mayúsculas.</b> Remite a las revistas de moda, el mundo del que viene Djenice, y ocupa poco para no robar espacio a las imágenes.</li>
+          <li><b>Cada serie con su nombre.</b> Las fotos se presentan como trabajos con identidad propia, no como una galería suelta.</li>
+          <li><b>Navegación siempre visible y discreta.</b> Fashion, Beauty, Conceptual y About me en una sola línea, separadas por finas barras.</li>
+        </ul>
+      </div>
+      <div class="duo">
+        <figure><button type="button" data-full="img/djenice/serie-dilsa.jpg" aria-label="Ampliar imagen"><img src="img/djenice/serie-dilsa.jpg" alt="Página de la serie Dilsa" loading="lazy"></button><figcaption>Página de serie: el título arriba y las imágenes enmarcadas en blanco.</figcaption></figure>
+        <figure><button type="button" data-full="img/djenice/serie-reflexo.jpg" aria-label="Ampliar imagen"><img src="img/djenice/serie-reflexo.jpg" alt="Página de la serie Reflexo" loading="lazy"></button><figcaption>Reflexo: la misma estructura para todas las series.</figcaption></figure>
+      </div>
+      <figure class="img-wide"><button type="button" data-full="img/djenice/galeria.jpg" aria-label="Ampliar imagen"><img src="img/djenice/galeria.jpg" alt="Cuadrícula completa de series" loading="lazy"></button><figcaption>Vista de todas las series: el color aparece solo cuando lo aporta la foto.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">04</div><span class="label">About me</span></div>
+      <div class="body">
+        <h2>Una página sobre ella con la misma voz</h2>
+        <p>En About me su nombre ocupa toda la pantalla, en la misma tipografía que el resto de la web, y se superpone a un retrato suyo. Debajo, su historia en pocas líneas y tres columnas que se leen de un vistazo: experiencia, contacto y formación.</p>
+      </div>
+      <div class="duo">
+        <figure><button type="button" data-full="img/djenice/about.jpg" aria-label="Ampliar imagen"><img src="img/djenice/about.jpg" alt="Cabecera de About me con el nombre en gran tamaño sobre un retrato" loading="lazy"></button><figcaption>El nombre como imagen de cabecera.</figcaption></figure>
+        <figure><button type="button" data-full="img/djenice/bio.jpg" aria-label="Ampliar imagen"><img src="img/djenice/bio.jpg" alt="Biografía y columnas de experiencia, contacto y formación" loading="lazy"></button><figcaption>Biografía y datos clave en tres columnas.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="g next">
+      <span class="label">Siguiente proyecto</span>
+      <a href="#housemate">House<em>Mate</em> →</a>
+    </section>
+  </div>
+</main>
+
+<!-- ================= SOBRE MÍ ================= -->
+<main class="view" id="v-sobre-mi">
+  <section class="page-hero wrap"><div class="g"><h1>Sobre <em>mí</em></h1></div></section>
+  <section class="wrap">
+    <div class="g bio">
+      <figure class="portrait"><img src="img/andrea.jpg" alt="Retrato de Andrea Gutiérrez Arcas"></figure>
+      <div class="txt">
+        <p>Siempre he sido una persona muy creativa, y fue esa creatividad la que me llevó a la tecnología a través del diseño UI. A medida que aprendía, descubrí lo que de verdad me apasionaba: investigar y entender a las personas para darles soluciones que respondan a sus necesidades reales.</p>
+        <p>Por eso, al terminar mi formación en UX/UI, empecé Computer Science &amp; IA en MSMK. Quería las herramientas técnicas para dar forma a lo que soy capaz de detectar y analizar.</p>
+        <p>Me apasiona organizar proyectos, siempre con el usuario en el centro, y sobre todo proyectos de inteligencia artificial y software. Disfruto planificando, anticipando riesgos y coordinando a perfiles distintos para que una idea llegue a buen puerto sin perder de vista a quién va dirigida. Trabajar por proyectos en la moda me enseñó a organizarme; en MSMK estoy aprendiendo a hacerlo con método.</p>
+        <p>Vengo de siete años en la industria de la moda. Me dieron un conocimiento profundo del consumidor, una sensibilidad estética que aplico a cada experiencia digital y la costumbre de trabajar en equipos muy diversos, con plazos ajustados y feedback directo.</p>
+      </div>
+    </div>
+    <div class="g cv">
+      <div class="col"><span class="label">Formación</span>
+        <ul>
+          <li>Computer Science &amp; IA / Applied Computing<span>MSMK · 2025–2028</span></li>
+          <li>Diseño UX/UI<span>Neoland · 2024–2025</span></li>
+          <li>Ingeniería Informática<span>UOC · 2021–2023</span></li>
+        </ul>
+      </div>
+      <div class="col"><span class="label">Herramientas</span>
+        <ul>
+          <li>Figma, FigJam, Framer<span>Diseño y prototipado</span></li>
+          <li>Python, pandas, SQL<span>Programación y datos</span></li>
+          <li>n8n, Power BI<span>Automatización y visualización</span></li>
+          <li>HTML, CSS<span>Web</span></li>
+          <li>EDT, PERT, Gantt, Scrum<span>Gestión de proyectos</span></li>
+        </ul>
+      </div>
+      <div class="col"><span class="label">Idiomas</span>
+        <ul>
+          <li>Castellano y catalán<span>Nativo</span></li>
+          <li>Inglés<span>C1</span></li>
+          <li>Alemán y francés<span>A1</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= CONTACTO ================= -->
+<main class="view" id="v-contacto">
+  <section class="page-hero wrap"><div class="g"><h1>Hablemos<em>.</em></h1></div></section>
+  <section class="wrap">
+    <div class="g contact-grid">
+      <div><span class="label">Email</span><span class="big">andreagutierrezarcas@gmail.com</span><button class="copy" type="button" data-copy="andreagutierrezarcas@gmail.com">Copiar email</button></div>
+      <div><span class="label">Teléfono</span><span class="big">+34 672 718 087</span><button class="copy" type="button" data-copy="+34672718087">Copiar teléfono</button></div>
+      <div><span class="label">Ubicación</span><span class="big">Madrid, España</span><span class="label">Disponible en modalidad híbrida</span></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="g"><h2><a href="#contacto">Hablemos<em>.</em></a></h2></div>
+    <div class="g cols">
+      <div>Andrea Gutiérrez Arcas</div>
+      <div>andreagutierrezarcas@gmail.com</div>
+      <div>Madrid, 2026</div>
+    </div>
+  </div>
+</footer>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Imagen ampliada"><img alt=""></div>
+
+<script>
+(function(){
+  const ids = ['inicio','proyectos','housemate','anima','luminaiot','autotaxi','nba','djenice','sobre-mi','contacto'];
+  const nav = document.getElementById('nav'), btn = document.getElementById('menuBtn');
+  function route(){
+    let h = (location.hash || '#inicio').slice(1);
+    if (!ids.includes(h)) h = 'inicio';
+    ids.forEach(i => document.getElementById('v-' + i).classList.toggle('on', i === h));
+    document.querySelectorAll('nav a[data-v]').forEach(a => a.toggleAttribute('aria-current', a.dataset.v === h || (['housemate','anima','luminaiot','autotaxi','nba','djenice'].includes(h) && a.dataset.v === 'proyectos')));
+    nav.classList.remove('open'); btn.setAttribute('aria-expanded','false');
+    window.scrollTo(0,0); reveal(); gallery();
+  }
+  btn.addEventListener('click', () => { const o = nav.classList.toggle('open'); btn.setAttribute('aria-expanded', o); });
+  window.addEventListener('hashchange', route);
+
+  // Galería horizontal guiada por el scroll
+  const sec = document.getElementById('gallery'), track = document.getElementById('track');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function gallery(){
+    if (still || !sec || !sec.offsetParent) return;
+    const r = sec.getBoundingClientRect(), total = sec.offsetHeight - (innerHeight - 64);
+    const p = Math.min(1, Math.max(0, -r.top / total));
+    const max = track.scrollWidth - innerWidth;
+    track.style.transform = 'translateX(' + (-p * Math.max(0, max)) + 'px)';
+  }
+  addEventListener('scroll', gallery, {passive:true}); addEventListener('resize', gallery);
+
+  // Aparición suave de las secciones que están por debajo de la pantalla
+  let io;
+  function reveal(){
+    if (still || !('IntersectionObserver' in window)) return;
+    if (io) io.disconnect();
+    io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.remove('pre'); io.unobserve(e.target); } }), {rootMargin:'0px 0px -10% 0px'});
+    document.querySelectorAll('.view.on .rv').forEach(el => {
+      if (el.getBoundingClientRect().top > innerHeight) { el.classList.add('pre'); io.observe(el); }
+    });
+  }
+
+  // Visor de imágenes
+  const lb = document.getElementById('lb'), lbi = lb.querySelector('img');
+  document.querySelectorAll('[data-full]').forEach(b => b.addEventListener('click', () => {
+    lbi.src = b.dataset.full; lbi.alt = b.querySelector('img').alt; lb.classList.add('on');
+  }));
+  lb.addEventListener('click', () => lb.classList.remove('on'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('on'); });
+
+  // Copiar datos de contacto
+  document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const t = b.textContent;
+    try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = 'Copiado'; }
+    catch(e){ b.textContent = 'Selecciona y copia el texto'; }
+    setTimeout(() => b.textContent = t, 1800);
+  }));
+
+  route();
+})();
+</script>
+</body>
+</html>
