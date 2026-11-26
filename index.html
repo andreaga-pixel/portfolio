@@ -145,6 +145,7 @@ table.t{width:100%;border-collapse:collapse;margin-top:24px;font-size:15px}
 table.t th,table.t td{text-align:left;padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top}
 table.t th{font-weight:400;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid var(--ink)}
 table.t td:last-child,table.t th:last-child{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:16px}
+table.t.txt td:last-child,table.t.txt th:last-child{text-align:left;white-space:normal}
 .tw{overflow-x:auto}
 
 .next{margin-top:144px;border-top:1px solid var(--ink);padding:32px 0 120px;align-items:end}
@@ -255,7 +256,8 @@ pre.code{margin-top:20px;background:var(--ink);color:#EDE9E1;padding:20px;overfl
 code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9em}
 pre.code.term{background:#1E1E1B;color:#C9E4B4}
 table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right;white-space:nowrap;padding-left:16px;font-variant-numeric:tabular-nums}
-@media (max-width:900px){.roadmap{grid-template-columns:1fr}.roadmap>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:12px}}
+.roadmap.r4{grid-template-columns:repeat(4,1fr)}
+@media (max-width:900px){.roadmap,.roadmap.r4{grid-template-columns:1fr}.roadmap>div+div{padding-left:0;border-left:0;border-top:1px solid var(--line);margin-top:12px}}
 
 
 /* Bloques de NBA */
@@ -322,6 +324,7 @@ table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right
   .facts>div{grid-column:span 6}
   .work .n{display:none}.work h3{grid-column:1 / span 8}.work .d{grid-column:1 / span 8;order:3}.work .y{grid-column:9 / span 3}.work .go{grid-column:12}
   .nums,.moscow{grid-template-columns:1fr 1fr}
+  .nums b{font-size:clamp(36px,11vw,64px)}
   .quotes,.duo{grid-template-columns:1fr}.duo figure:nth-child(2){margin-top:0}
   .screens{grid-template-columns:repeat(3,1fr)}.screens figure:nth-child(even){margin-top:24px}
   .cv .col,.contact-grid>div{grid-column:1 / -1;margin-bottom:32px}
@@ -370,7 +373,7 @@ table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right
       <li><a href="#anima"><span class="n">02</span><h3>Anima</h3><span class="d">Project management · IA en salud</span><span class="y">2025–26</span><span class="go">Ver →</span></a></li>
       <li><a href="#luminaiot"><span class="n">03</span><h3>LuminaIoT</h3><span class="d">Software lifecycle · Scrum · UML</span><span class="y">2026</span><span class="go">Ver →</span></a></li>
       <li><a href="#autotaxi"><span class="n">04</span><h3>AutoTaxi</h3><span class="d">Python · Estructuras de datos · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
-      <li><a href="#nba"><span class="n">05</span><h3>NBA</h3><span class="d">Análisis de datos · pandas · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
+      <li><a href="#nba"><span class="n">05</span><h3>NBA</h3><span class="d">Machine learning · scikit-learn · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
       <li><a href="#djenice"><span class="n">06</span><h3>Djenice Duarte Photo</h3><span class="d">Diseño web · Figma y Framer</span><span class="y">2026</span><span class="go">Ver →</span></a></li>
     </ol>
   </section>
@@ -395,7 +398,7 @@ table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right
       <li><a href="#anima"><span class="n">02</span><h3>Anima</h3><span class="d">Project management · IA en salud</span><span class="y">2025–26</span><span class="go">Ver →</span></a></li>
       <li><a href="#luminaiot"><span class="n">03</span><h3>LuminaIoT</h3><span class="d">Software lifecycle · Scrum · UML</span><span class="y">2026</span><span class="go">Ver →</span></a></li>
       <li><a href="#autotaxi"><span class="n">04</span><h3>AutoTaxi</h3><span class="d">Python · Estructuras de datos · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
-      <li><a href="#nba"><span class="n">05</span><h3>NBA</h3><span class="d">Análisis de datos · pandas · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
+      <li><a href="#nba"><span class="n">05</span><h3>NBA</h3><span class="d">Machine learning · scikit-learn · En curso</span><span class="y">2026–27</span><span class="go">Ver →</span></a></li>
       <li><a href="#djenice"><span class="n">06</span><h3>Djenice Duarte Photo</h3><span class="d">Diseño web · Figma y Framer</span><span class="y">2026</span><span class="go">Ver →</span></a></li>
     </ol>
   </section>
@@ -921,18 +924,19 @@ table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right
       <a class="back" href="#proyectos">← Proyectos</a>
       <span class="status-pill">En desarrollo · Noviembre 2026</span>
       <h1>Auto<em>Taxi</em></h1>
-      <p class="lead">Un sistema de despacho de taxis autónomos: recibe solicitudes de viaje, las atiende en orden de llegada, asigna el taxi libre y calcula su ruta por un mapa con obstáculos. Lo estoy construyendo por entregas, y cada una pasa del diseño en papel a código probado.</p>
+      <p class="lead">Un sistema de despacho de taxis autónomos: recibe solicitudes de viaje, las ordena por prioridad, calcula la ruta de cada una por un mapa con obstáculos y sigue funcionando aunque una solicitud falle. Lo estoy construyendo por entregas, y cada una pasa del diseño en papel a código probado.</p>
     </div>
     <div class="g facts">
       <div><span class="label">Contexto</span>Unit 19 · Data Structures and Algorithms, Computer Science &amp; IA, MSMK</div>
       <div><span class="label">Año</span>2026–27, en curso</div>
       <div><span class="label">Rol</span>Proyecto individual: análisis, diseño de estructuras de datos e implementación</div>
-      <div><span class="label">Tecnología</span><ul><li>Python 3.10, sin librerías externas</li><li>dict y collections.deque</li><li>Git y GitHub</li></ul></div>
+      <div><span class="label">Tecnología</span><ul><li>Python 3.10, sin librerías externas</li><li>dict, deque y set</li><li>Ordenación por inserción y búsqueda en anchura (BFS)</li><li>Git y GitHub</li></ul></div>
     </div>
-    <div class="roadmap" aria-label="Hoja de ruta del proyecto">
+    <div class="roadmap r4" aria-label="Hoja de ruta del proyecto">
       <div class="done"><span class="label">Entrega 1 · Hecho</span><b>Análisis y diseño</b><p>Requisitos, modelo de datos, estados, ADTs, cola, pila y complejidad.</p></div>
       <div class="done"><span class="label">Entrega 2 · Hecho</span><b>Gestor de solicitudes</b><p>Primera versión ejecutable, 8 de 8 pruebas correctas y análisis de costes.</p></div>
-      <div class="now"><span class="label">Siguiente</span><b>Flota, mapa y rutas</b><p>Taxis, validación contra el mapa, búsqueda de rutas y asignación.</p></div>
+      <div class="done"><span class="label">Entrega 3 · Hecho</span><b>Prioridad y rutas</b><p>Ordenación por prioridad, búsqueda de rutas en 10 mapas y gestor integrado. 22 de 22 pruebas.</p></div>
+      <div class="now"><span class="label">Siguiente</span><b>Flota y asignación</b><p>Taxis libres y asignación de cada solicitud al taxi adecuado.</p></div>
     </div>
   </section>
 
@@ -953,7 +957,7 @@ table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right
       <div class="side"><div class="num">02</div><span class="label">El mapa</span></div>
       <div class="body">
         <h2>Un mapa es un grafo</h2>
-        <p>Modelé el mapa como un grafo no dirigido: cada celda transitable es un vértice y cada par de celdas vecinas, en horizontal o vertical, es una arista de coste 1. Los obstáculos no generan vértices. El grafo se deduce de la matriz cuando hace falta, así no hay dos copias de los mismos datos que mantener sincronizadas. Esta es la base para la búsqueda de rutas de la siguiente entrega.</p>
+        <p>Modelé el mapa como un grafo no dirigido: cada celda transitable es un vértice y cada par de celdas vecinas, en horizontal o vertical, es una arista de coste 1. Los obstáculos no generan vértices. El grafo se deduce de la matriz cuando hace falta, así no hay dos copias de los mismos datos que mantener sincronizadas. Sobre este modelo funciona la búsqueda de rutas de la tercera entrega.</p>
       </div>
       <figure class="img-right"><button type="button" data-full="img/autotaxi/grafo.jpg" aria-label="Ampliar diagrama"><img src="img/autotaxi/grafo.jpg" alt="Mapa de 3 por 3 y el grafo resultante" loading="lazy"></button><figcaption>Mapa de 3 × 3 y su grafo: 7 vértices y 8 aristas.</figcaption></figure>
     </section>
@@ -962,13 +966,13 @@ table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right
       <div class="side"><div class="num">03</div><span class="label">Estructuras</span></div>
       <div class="body">
         <h2>Dos estructuras para dos necesidades</h2>
-        <p>El gestor tiene que hacer dos cosas que ninguna colección de Python resuelve bien a la vez: encontrar cualquier solicitud por su ID, también las ya atendidas, y sacar siempre la más antigua. Por eso usa dos estructuras que comparten la misma ficha de cada solicitud:</p>
+        <p>El gestor tiene que hacer dos cosas que ninguna colección de Python resuelve bien a la vez: encontrar cualquier solicitud por su ID, también las ya atendidas, y sacar siempre la siguiente. Por eso usa dos estructuras que comparten la misma ficha de cada solicitud:</p>
         <div class="tw">
           <table class="t">
             <thead><tr><th>Estructura</th><th>Guarda</th><th>Resuelve</th></tr></thead>
             <tbody>
               <tr><td>Diccionario <code>_registry</code></td><td>Todas las solicitudes, por ID</td><td>Consultar y evitar IDs repetidos en O(1)</td></tr>
-              <tr><td>Deque <code>_pending</code></td><td>Solo las pendientes, en orden</td><td>Sacar la más antigua en O(1)</td></tr>
+              <tr><td>Deque <code>_pending</code></td><td>Solo las pendientes, en orden</td><td>Sacar la primera en O(1)</td></tr>
             </tbody>
           </table>
         </div>
@@ -988,12 +992,13 @@ table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right
     user = validate_user(data["user"])
     pickup = validate_position(data["pickup"])
     destination = validate_position(data["destination"])
+    priority = validate_priority(data.get("priority"))
     if request_id in self._registry:
         raise DuplicateIdError(f"Ya existe una solicitud con ID {request_id}")
 
     # Fase 2: crear la solicitud y guardarla
     request = Request(request_id, user, pickup, destination,
-                      arrival_order=self._next_order)
+                      priority=priority, arrival_order=self._next_order)
     self._next_order += 1
     self._registry[request_id] = request
     self._pending.append(request)
@@ -1002,34 +1007,14 @@ table.cost td:not(:first-child),table.cost th:not(:first-child){text-align:right
         <ul class="list">
           <li><b>IDs normalizados.</b> Para el ordenador "R-0001" y "r-0001" son distintos, así que la comprobación de duplicados dejaba pasar el segundo. Ahora limpio espacios y paso a mayúsculas antes de comparar.</li>
           <li><b>Validación en un módulo propio.</b> En el diseño estaba dentro de <code>enqueue</code>; al ver que la misma regla se usa en recogida y destino, la separé para escribirla y probarla una sola vez.</li>
-          <li><b>Número de llegada.</b> Cada solicitud recibe 1, 2, 3… para que el orden FIFO se vea a simple vista.</li>
+          <li><b>Número de llegada.</b> Cada solicitud recibe 1, 2, 3… para que el orden se vea a simple vista. En la tercera entrega se convirtió en el desempate de la prioridad.</li>
           <li><b>No borrar al atender.</b> Extraer saca la solicitud de pendientes, pero la conserva en el registro con su estado y su hora: el historial del día no se pierde.</li>
         </ul>
       </div>
     </section>
 
     <section class="g block rv">
-      <div class="side"><div class="num">05</div><span class="label">Pruebas</span></div>
-      <div class="body">
-        <h2>8 de 8 pruebas correctas</h2>
-        <p>Probé los seis casos del enunciado, incluidos los que deben fallar: ID duplicado, consulta de un ID inexistente, extracción con la cola vacía, campos que faltan y coordenadas mal formadas. En cada error compruebo también que no se ha guardado nada.</p>
-<pre class="code term"><code>PRUEBA 5: Estructura vacía
-  Esperado:  Termina de forma controlada con EmptyQueueError
-  Obtenido:  EmptyQueueError (No hay solicitudes pendientes). ¿Vacía? True
-  Resultado: CORRECTO
-
-PRUEBA 6b: Coordenada con un decimal
-  Entrada:   pickup (1.5, 2)
-  Esperado:  Se rechaza con InvalidPositionError y no se registra
-  Obtenido:  InvalidPositionError. Registradas: 0
-  Resultado: CORRECTO
-
-=== RESUMEN: 8 de 8 pruebas correctas ===</code></pre>
-      </div>
-    </section>
-
-    <section class="g block rv">
-      <div class="side"><div class="num">06</div><span class="label">Costes</span></div>
+      <div class="side"><div class="num">05</div><span class="label">Costes</span></div>
       <div class="body">
         <h2>Cuánto cuesta cada operación</h2>
         <p>Analicé el coste contando operaciones, no segundos, porque los segundos dependen del ordenador. Distingo el caso esperado, el peor caso, cuando muchas claves colisionan en la tabla hash, y el coste amortizado de las veces que el diccionario se agranda.</p>
@@ -1050,10 +1035,147 @@ PRUEBA 6b: Coordenada con un decimal
     </section>
 
     <section class="g block rv">
-      <div class="side"><div class="num">07</div><span class="label">Cómo trabajo</span></div>
+      <div class="side"><div class="num">06</div><span class="label">Prioridad</span></div>
+      <div class="body">
+        <h2>Ordenar sin <em>sorted()</em></h2>
+        <p>En la tercera entrega las solicitudes llegan con una prioridad, y el número más bajo se atiende antes. Antes de atender el lote, lo ordeno con un algoritmo de inserción que implementé yo. <code>sorted()</code> solo aparece en las pruebas, para comprobar que el resultado es correcto.</p>
+        <h3>La clave: prioridad y, si empatan, llegada</h3>
+        <p>Cada solicitud se compara por la pareja (prioridad, número de llegada). Python compara las parejas como un diccionario compara palabras: primero la prioridad y, solo si empatan, la llegada. Como dos solicitudes nunca comparten número de llegada, el orden siempre es el mismo.</p>
+<pre class="code"><code>def clave_prioridad(request: Request) -> tuple[int, int]:
+    return (request.priority, request.arrival_order)
+
+def insercion(lista: list, clave=clave_prioridad) -> int:
+    comparaciones = 0
+    for i in range(1, len(lista)):
+        actual = lista[i]
+        clave_actual = clave(actual)
+        j = i - 1
+        while j >= 0:
+            comparaciones += 1
+            if clave(lista[j]) > clave_actual:   # ">" y no ">=": estable
+                lista[j + 1] = lista[j]
+                j -= 1
+            else:
+                break
+        lista[j + 1] = actual
+    return comparaciones</code></pre>
+        <ul class="list">
+          <li><b>Estable.</b> Uso <code>&gt;</code> y no <code>&gt;=</code>: dos solicitudes con la misma clave no se adelantan entre sí.</li>
+          <li><b>Cuenta comparaciones.</b> No hace falta para ordenar, pero me permite medir el trabajo real y comprobar el mejor y el peor caso.</li>
+          <li><b>El gestor no ordena, comprueba.</b> <code>reorder_pending</code> recibe el lote ya ordenado y lo rechaza si falta o se repite alguna solicitud. Es el mismo principio de la entrega 2: primero comprobar, después guardar.</li>
+        </ul>
+        <div class="tw" style="margin-top:20px">
+          <table class="t cost">
+            <thead><tr><th>Caso</th><th>Comparaciones</th><th>Coste</th></tr></thead>
+            <tbody>
+              <tr><td>Mejor: lote ya ordenado</td><td>n − 1</td><td>O(n)</td></tr>
+              <tr><td>Peor: lote al revés</td><td>n(n − 1) / 2</td><td>O(n²)</td></tr>
+              <tr><td>Memoria extra</td><td>—</td><td>O(1)</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">07</div><span class="label">Rutas</span></div>
+      <div class="body">
+        <h2>Arreglar el algoritmo antes de usarlo</h2>
+        <p>Para buscar rutas partí del código de búsqueda en anchura (BFS) que nos dio el profesor. Antes de integrarlo lo probé con casos límite, y fallaba en varios: no terminaba si no había ruta, daba error con posiciones fuera del mapa y escribía sobre el propio mapa para marcar las casillas visitadas.</p>
+        <div class="tw">
+          <table class="t txt">
+            <thead><tr><th>Original</th><th>Mi versión</th></tr></thead>
+            <tbody>
+              <tr><td>Origen y destino fijos en el código</td><td>Los recibe como parámetros</td></tr>
+              <tr><td>Imprimía la ruta, del destino al origen</td><td>Devuelve la ruta completa, del origen al destino</td></tr>
+              <tr><td>Bucle infinito si no había ruta</td><td>Termina al explorar todo lo alcanzable y devuelve una ruta vacía</td></tr>
+              <tr><td>Origen igual a destino: ida y vuelta de 2 movimientos</td><td>Ruta de longitud 0</td></tr>
+              <tr><td><code>IndexError</code> fuera del mapa; aceptaba una pared como origen</td><td>Valida límites y obstáculos antes de buscar</td></tr>
+              <tr><td>Marcaba las visitadas escribiendo un 2 en el mapa</td><td>Un <code>set</code> aparte: el mapa queda intacto para la siguiente solicitud</td></tr>
+              <tr><td>Recorría la lista para encontrar cada predecesor</td><td>Accede por índice: reconstruir la ruta cuesta O(L)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:20px">Como BFS avanza por ondas, la primera vez que llega al destino lo hace por el camino con menos movimientos. Además cuento los nodos explorados para medir cuánto trabaja en cada mapa.</p>
+      </div>
+      <figure class="img-wide"><button type="button" data-full="img/autotaxi/mapas.jpg" aria-label="Ampliar imagen"><img src="img/autotaxi/mapas.jpg" alt="Los diez mapas de prueba, de 10 por 8 a 22 por 25 casillas" loading="lazy"></button><figcaption>Los 10 mapas de prueba, de 10 × 8 a 22 × 25: barreras, barrios, pasillos y sectores sin conexión.</figcaption></figure>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">08</div><span class="label">Integración</span></div>
+      <div class="body">
+        <h2>Un fallo no detiene el lote</h2>
+        <p>El gestor integrado une todas las piezas: ordena el lote, saca la siguiente solicitud, busca su ruta y guarda el resultado. Cada solicitud termina en uno de tres estados, y si una falla, el lote sigue con la siguiente.</p>
+        <div class="tw">
+          <table class="t txt">
+            <thead><tr><th>Estado</th><th>Cuándo</th></tr></thead>
+            <tbody>
+              <tr><td><code>HANDLED</code></td><td>Hay ruta: se guardan la ruta y su longitud</td></tr>
+              <tr><td><code>UNRESOLVED</code></td><td>Origen y destino válidos, pero no hay camino entre ellos</td></tr>
+              <tr><td><code>INVALID</code></td><td>Origen o destino fuera del mapa o sobre un obstáculo</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:20px">Preparé la demostración con un caso de cada tipo sobre el mapa 09, que tiene dos sectores sin conexión:</p>
+<pre class="code term"><code>LOTE PENDIENTE (orden de llegada): R-0001, R-0002, R-0003, R-0004, R-0005, R-0006
+LOTE ORDENADO (prioridad, llegada): R-0002, R-0004, R-0001, R-0003, R-0005, R-0006
+Comparaciones de la inserción: 7
+
+R-0002 (Luis) | prioridad 1 | (2, 2) -> (8, 2)
+   NO RESUELTA. No existe ninguna ruta entre el origen y el destino | Nodos explorados: 64
+
+R-0004 (Dani) | prioridad 1 | (4, 4) -> (4, 4)
+   ATENDIDA. Longitud: 0 movimientos | Nodos explorados: 0
+
+R-0001 (Ana) | prioridad 2 | (1, 1) -> (5, 14)
+   ATENDIDA. Longitud: 17 movimientos | Nodos explorados: 62
+
+R-0005 (Eva) | prioridad 3 | (2, 7) -> (1, 1)
+   INVÁLIDA. El origen (2, 7) está sobre un obstáculo
+
+R-0006 (Hugo) | prioridad 3 | (1, 1) -> (15, 3)
+   INVÁLIDA. El destino (15, 3) está fuera del mapa
+
+Pendientes: 0 | ¿Vacía? True</code></pre>
+        <p class="note">Salida de <code>demo_ei3.py</code>, abreviada.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">09</div><span class="label">Pruebas</span></div>
+      <div class="body">
+        <h2>30 de 30 pruebas correctas</h2>
+        <p>Cada entrega tiene su batería de pruebas, incluidos los casos que deben fallar. En cada error compruebo también que no se ha guardado ni perdido nada.</p>
+        <div class="tw">
+          <table class="t">
+            <thead><tr><th>Batería</th><th>Qué pruebo</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td>Gestor (entrega 2)</td><td>ID duplicado, ID inexistente, cola vacía, campos que faltan, coordenadas mal formadas</td><td>8 de 8</td></tr>
+              <tr><td>Ordenación</td><td>Lote con empates, sin prioridad, vacío, de una solicitud, con una solicitud perdida o duplicada</td><td>6 de 6</td></tr>
+              <tr><td>Sistema integrado</td><td>Ruta que rodea un obstáculo, origen igual a destino, búsqueda sin éxito, coordenada inválida, lote vacío y una ruta en cada uno de los 10 mapas</td><td>16 de 16</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:20px">En los mapas no me basta con que haya una ruta: compruebo que empieza y termina donde debe, que solo pasa por casillas libres y que cada paso va a una casilla vecina. En los mapas 09 y 10, con sectores separados, compruebo lo contrario: que el programa dice que no hay ruta y termina.</p>
+<pre class="code term"><code>PRUEBA 4: Búsqueda sin éxito y el programa continúa
+  Esperado:  R-0001 UNRESOLVED con motivo; R-0002 se atiende igualmente (HANDLED)
+  Obtenido:  R-0001: UNRESOLVED (No existe ninguna ruta entre el origen y el destino)
+             R-0002: HANDLED, longitud 15 | pendientes: 0
+  Resultado: CORRECTO
+
+PRUEBA 7-07: mapa_07 (20 x 25)
+  Obtenido:  longitud 71 | explorados 348 de 350 libres | problemas: ninguno
+  Resultado: CORRECTO
+
+=== RESUMEN: 16 de 16 pruebas correctas ===</code></pre>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">10</div><span class="label">Cómo trabajo</span></div>
       <div class="body">
         <h2>IA como apoyo, decisiones propias</h2>
-        <p>Uso GitHub Copilot para escribir código más rápido y Claude para entender conceptos y desbloquearme cuando una estructura no funcionaba. Lo declaro en el repositorio. Las decisiones de diseño, las pruebas y su documentación son mías, y el código está comentado paso a paso para poder explicarlo.</p>
+        <p>Uso GitHub Copilot para escribir código más rápido y Claude para entender conceptos y desbloquearme cuando una estructura no funcionaba. Lo declaro en el repositorio. Las decisiones de diseño, las pruebas y su documentación son mías, y el código está comentado paso a paso para poder explicarlo. Cuando parto de código ajeno, como la búsqueda del profesor, dejo escrito qué cambié y por qué.</p>
         <p style="margin-top:28px"><a class="textlink" href="https://github.com/andreaga-pixel/autoTaxi_EI2_UNIT19">Ver el código en GitHub ↗</a></p>
       </div>
     </section>
@@ -1072,18 +1194,18 @@ PRUEBA 6b: Coordenada con un decimal
       <a class="back" href="#proyectos">← Proyectos</a>
       <span class="status-pill">En desarrollo · Noviembre 2026</span>
       <h1>Gestión de <em>carga</em> en la NBA</h1>
-      <p class="lead">¿Juega hoy con normalidad, con límite de minutos o descansa? Estoy construyendo una herramienta de análisis de datos para que el responsable de rendimiento de un equipo de la NBA tome esa decisión antes de cada partido, con datos públicos de la liga y argumentos que pueda defender ante el entrenador.</p>
+      <p class="lead">¿Qué jugadores tienen más riesgo de lesionarse en el próximo partido? He construido un modelo que, la víspera de cada partido, da a cada jugador de los Boston Celtics un color: rojo, amarillo o verde. En las dos últimas temporadas, que el modelo no había visto, avisa en 1 de cada 10 partidos, frente a 1 de cada 4 de la regla actual, y aun así detecta más lesiones.</p>
     </div>
     <div class="g facts">
       <div><span class="label">Contexto</span>Unit 17 · Data Science, Computer Science &amp; IA, MSMK</div>
       <div><span class="label">Año</span>2026–27, en curso</div>
-      <div><span class="label">Rol</span>Proyecto individual: problema de negocio, exploración y diseño de la solución</div>
-      <div><span class="label">Herramientas</span><ul><li>Python y pandas en Jupyter</li><li>Git y GitHub, 27 commits</li><li>Power BI o Streamlit para el dashboard</li></ul></div>
+      <div><span class="label">Rol</span>Proyecto individual: problema de negocio, limpieza, features, modelo y recomendación</div>
+      <div><span class="label">Herramientas</span><ul><li>Python, pandas y scikit-learn en Jupyter</li><li>Plotly para los gráficos</li><li>Git y GitHub, 78 commits</li></ul></div>
     </div>
     <div class="roadmap" aria-label="Hoja de ruta del proyecto">
       <div class="done"><span class="label">Entrega 1 · Hecho</span><b>Brief y exploración</b><p>Problema de negocio, hipótesis, KPIs, arquitectura y perfil de calidad del dataset.</p></div>
-      <div class="now"><span class="label">Siguiente</span><b>Limpieza y modelo de datos</b><p>Minutos, fechas y textos normalizados; tabla de hechos jugador-partido.</p></div>
-      <div><span class="label">Después</span><b>Hipótesis y dashboard</b><p>Probar H1–H3 y construir el semáforo de carga de la plantilla.</p></div>
+      <div class="done"><span class="label">Entrega 2 · Hecho</span><b>Limpieza y modelo</b><p>Target de lesión nueva, 8 features, gradient boosting y semáforo de tres colores evaluado en test.</p></div>
+      <div class="now"><span class="label">Siguiente</span><b>Despliegue y seguimiento</b><p>Color automático la víspera de cada partido, acceso restringido y reentreno cada temporada.</p></div>
     </div>
   </section>
 
@@ -1092,13 +1214,13 @@ PRUEBA 6b: Coordenada con un decimal
       <div class="side"><div class="num">01</div><span class="label">Decisión</span></div>
       <div class="body">
         <h2>Empezar por la decisión, no por los datos</h2>
-        <p>Planteé el proyecto para una consultora ficticia, AGA Analytics, con los Boston Celtics como club piloto. El objetivo del club no es ganar cada partido de la temporada regular, sino llegar a los playoffs con la plantilla sana: perder un partido por un descanso cuesta poco, pero la lesión de un titular en marzo puede costar la temporada.</p>
+        <p>Planteé el proyecto para una consultora ficticia, AGA Analytics, con los Boston Celtics como club piloto. El objetivo del club no es ganar cada partido de la temporada regular, sino llegar a los playoffs con la plantilla sana: perder un partido por un descanso cuesta poco, pero la lesión de un titular en marzo puede costar la temporada. La decisión que alimenta el modelo es cuántos minutos juega cada jugador: con normalidad, con límite o descansando.</p>
         <h3>Restricciones reales</h3>
         <ul class="list">
-          <li><b>Normativa de la NBA.</b> Desde 2023 no se puede descansar a más de una estrella por partido, las estrellas deben jugar los partidos televisados y necesitan 65 partidos para optar a premios.</li>
+          <li><b>Normativa de la NBA.</b> Desde 2023-24 no se puede descansar a más de una estrella por partido, y la liga multa a los equipos que descansan a estrellas sanas: 100.000 $ la primera vez y hasta 1,25 millones la tercera.</li>
           <li><b>Solo datos públicos.</b> Minutos, calendario y estadísticas; nada de GPS ni datos médicos.</li>
           <li><b>Tiempo.</b> La recomendación tiene que estar lista la víspera del partido.</li>
-          <li><b>Quién decide.</b> La herramienta recomienda; el entrenador decide.</li>
+          <li><b>Quién decide.</b> El modelo avisa; el cuerpo médico y el entrenador deciden.</li>
         </ul>
       </div>
     </section>
@@ -1106,13 +1228,13 @@ PRUEBA 6b: Coordenada con un decimal
     <section class="g block rv">
       <div class="side"><div class="num">02</div><span class="label">Dataset</span></div>
       <div class="body">
-        <h2>1,67 millones de filas por explorar</h2>
-        <p>Trabajo con el dataset público de box scores de la NBA en Kaggle (licencia CC0, datos originales de NBA.com). Cada fila es un jugador en un partido. Uso las temporadas desde 2015-16 y comprobé que no hay ninguna pareja jugador-partido repetida.</p>
+        <h2>De 1,67 millones de filas a 257.888</h2>
+        <p>Trabajo con el dataset público de box scores de la NBA en Kaggle (licencia CC0, datos originales de NBA.com). Cada fila es un jugador en un partido. En la limpieza me quedo con las temporadas desde 2015-16 y los partidos oficiales, relleno con 0 los minutos de quien no jugó (era su carga real ese día) y clasifico los comentarios de ausencia en lesión, decisión técnica u otros. Las bajas por protocolo COVID no cuentan como lesión, porque un contagio no depende de la carga.</p>
         <div class="nums">
-          <div><b>1,67M</b><span>filas en las estadísticas por jugador, 40 columnas</span></div>
-          <div><b>396.530</b><span>filas en mi ventana, desde la temporada 2015-16</span></div>
-          <div><b>4</b><span>tablas unidas: jugadores, partidos, equipos y estadísticas</span></div>
-          <div><b>0</b><span>duplicados jugador-partido</span></div>
+          <div><b>1,67M</b><span>filas originales, desde 1947</span></div>
+          <div><b>366.218</b><span>filas limpias, desde la temporada 2015-16</span></div>
+          <div><b>257.888</b><span>filas en riesgo: el jugador jugó el partido anterior de su equipo</span></div>
+          <div><b>2.905</b><span>lesiones nuevas, el 1,13 % de las filas en riesgo</span></div>
         </div>
       </div>
     </section>
@@ -1129,7 +1251,7 @@ PRUEBA 6b: Coordenada con un decimal
           <div style="--w:89.06" class="a"><span>150.189 · no jugó, con motivo</span></div>
           <div style="--w:10.94" class="b"><span>18.447</span></div>
         </div>
-        <p class="note">168.636 filas sin minutos. Los 18.447 nulos reales son el 3,7 % de mi ventana, y más de la mitad son de pretemporada, que excluyo.</p>
+        <p class="note">168.636 filas sin minutos en todo el dataset.</p>
 
         <h3>El descanso casi no se registra</h3>
         <p>Solo 418 ausencias se etiquetan como descanso, frente a 120.262 "Coach's Decision". Y al contarlas por año aparece algo que no esperaba: tras el pico de 2016, la etiqueta cae a partir de 2018, coincidiendo con la normativa de la NBA contra el descanso de estrellas. <strong>Cómo se registra un dato depende de las reglas de la liga.</strong></p>
@@ -1138,72 +1260,173 @@ PRUEBA 6b: Coordenada con un decimal
         </div>
         <p class="note">Ausencias con la palabra "rest" en el comentario, por año natural. 2026 llega hasta junio.</p>
 
-        <h3>Otros problemas de calidad</h3>
+        <h3>El riesgo cambia con la temporada y la edad</h3>
+        <p>La tasa de lesión nueva casi se triplica de octubre (0,51 %) a marzo (1,45 %) a medida que se acumulan partidos, y sube con la edad: 0,97 % en los menores de 25 y 1,35 % en los de 30 o más. En playoffs, en cambio, es mucho más baja (0,28 %), un dato que más adelante explica uno de los puntos débiles del modelo.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">04</div><span class="label">Target</span></div>
+      <div class="body">
+        <h2>Qué cuenta como lesión nueva</h2>
+        <p>Un jugador que se pierde 10 partidos por un esguince aparece 10 veces como "lesión", pero solo la primera es el momento en que se lesiona. Si las contara todas, el modelo aprendería que "si ayer estaba lesionado, hoy también": acertaría mucho y no serviría de nada, porque el cuerpo técnico ya sabe quién está lesionado. Por eso el target es una <strong>lesión nueva</strong>: el jugador jugó el partido anterior de su equipo y se pierde este por lesión.</p>
+        <h3>Un dato raro que destapó un error</h3>
+        <p>Al construir la feature de días de descanso, los jugadores con 8 días o más sin jugar tenían un 4,12 % de lesiones nuevas, cuatro veces más que los que llevaban 2 o 3 días. No tenía sentido: estaban descansados. Al investigarlo vi que eran jugadores que desaparecen de los datos durante varios partidos y vuelven como lesionados. Tim Duncan, por ejemplo, jugó el 22/01/2016, su equipo siguió jugando sin él más de dos semanas y el 09/02 aparece con molestias en la rodilla. Esa lesión no empezó ese día.</p>
+        <p>Corregí la regla: ahora solo está en riesgo quien jugó el partido anterior de su equipo, no su último partido registrado.</p>
         <div class="tw">
-          <table class="t">
-            <thead><tr><th>Problema</th><th>Cómo lo trato</th></tr></thead>
+          <table class="t cost">
+            <thead><tr><th></th><th>Antes</th><th>Después</th></tr></thead>
             <tbody>
-              <tr><td>Los minutos se leen como texto: 2.097 filas usan el formato <code>mm:ss</code></td><td>Convertirlos a minutos decimales sin eliminar filas</td></tr>
-              <tr><td>7.891 variantes de texto en los comentarios de ausencia</td><td>Normalizar y clasificar: lesión, decisión técnica, descanso</td></tr>
-              <tr><td>El mismo tipo de partido escrito de varias formas ("Preseason", "Pre Season")</td><td>Unificar y quedarme solo con partidos oficiales</td></tr>
-              <tr><td>Al 10,4 % de los jugadores recientes le falta la fecha de nacimiento</td><td>Comprobé que son solo el 0,2 % de las filas: impacto bajo</td></tr>
+              <tr><td>Filas en riesgo</td><td>267.599</td><td>257.888</td></tr>
+              <tr><td>Lesiones nuevas</td><td>3.518</td><td>2.905</td></tr>
+              <tr><td>Tasa de lesión nueva</td><td>1,31 %</td><td>1,13 %</td></tr>
             </tbody>
           </table>
         </div>
+        <p style="margin-top:20px">Las 613 lesiones que quité eran el 17 % del total, y la relación entre descanso y lesión pasó a ser la esperable: del 1,80 % con un día de descanso al 0,61 % con ocho o más. <strong>Un resultado que no tiene sentido suele ser un error en los datos, no un descubrimiento.</strong></p>
       </div>
     </section>
 
     <section class="g block rv">
-      <div class="side"><div class="num">04</div><span class="label">Hipótesis</span></div>
+      <div class="side"><div class="num">05</div><span class="label">Hipótesis</span></div>
       <div class="body">
-        <h2>Tres hipótesis, ordenadas por valor</h2>
+        <h2>Lo que dijeron los datos</h2>
         <ul class="list hyp">
-          <li><span class="label">H1 · Prioridad alta</span><b>La carga acumulada aumenta el riesgo de lesión.</b> Los jugadores con más minutos en los 14 días previos se pierden más partidos por lesión en las dos semanas siguientes.</li>
-          <li><span class="label">H2 · Prioridad media</span><b>El rendimiento cae en el segundo partido de un back-to-back, sobre todo en veteranos.</b> Lo mediré con el True Shooting % del mismo jugador con 0 días de descanso frente a 2 o más.</li>
-          <li><span class="label">H3 · Prioridad media</span><b>Descansar a un titular cuesta poco contra rivales débiles.</b> Compararé el % de victorias según el nivel del rival y la ausencia de un titular.</li>
+          <li><span class="label">H1 · Apoyada</span><b>La carga acumulada se asocia al riesgo de lesión.</b> Dividí los partidos en cinco grupos iguales según los minutos de los 14 días previos: el de más carga tiene un 1,54 % de lesiones nuevas y el de menos, un 0,56 %. Casi el triple, y sube en cada grupo. Es una relación, no una causa: quienes más juegan también suelen ser titulares y veteranos.</li>
+          <li><span class="label">H2 · No confirmada</span><b>El rendimiento no cae en el segundo partido de un back-to-back.</b> El True Shooting % solo baja de 56,81 % a 56,31 %, y comparando a cada jugador consigo mismo el cambio (−0,22 puntos) puede ser casualidad (p = 0,16). El motivo para dar descanso es el riesgo de lesión, no el rendimiento.</li>
+          <li><span class="label">H3 · Fuera de alcance</span><b>El efecto de descansar según el nivel del rival.</b> La dejé como ampliación para completar y validar bien las dos primeras, en lugar de dejar tres a medias.</li>
         </ul>
-        <p style="margin-top:20px">H1 va primero porque anticipar una lesión es el objetivo principal del departamento. H2 y H3 ayudan a decidir cuándo y cómo descansar, pero solo importan si descansar evita algo. Para cada hipótesis dejé escrito qué haría la herramienta si se cumple y si no.</p>
       </div>
     </section>
 
     <section class="g block rv">
-      <div class="side"><div class="num">05</div><span class="label">KPIs</span></div>
+      <div class="side"><div class="num">06</div><span class="label">Baseline</span></div>
       <div class="body">
-        <h2>Un semáforo que compara a cada jugador consigo mismo</h2>
-        <p>El responsable de rendimiento tiene que revisar la plantilla en pocos minutos, así que la carga no se muestra como un número, sino como un semáforo junto a cada jugador. La clave es el umbral: si fuera común, una estrella que siempre juega 35 minutos estaría siempre en rojo y un suplente nunca. Por eso cada jugador se compara con su propio historial.</p>
-        <div class="lights">
-          <div class="l-g"><i></i><b>Verde</b><span>Carga de 14 días por debajo del 60 % de su historial. Juega con normalidad.</span></div>
-          <div class="l-a"><i></i><b>Ámbar</b><span>Entre el 60 % y el 80 %. Vigilar y reducir la carga en el entrenamiento.</span></div>
-          <div class="l-r"><i></i><b>Rojo</b><span>Por encima del 80 %. Proponer al entrenador un límite de minutos o un descanso.</span></div>
+        <h2>La regla actual apenas mejora el azar</h2>
+        <p>Antes de entrenar nada medí la regla del brief: alerta si la carga de 14 días del jugador supera el percentil 80 de su propio historial, calculado solo con sus partidos anteriores. Avisa en uno de cada cuatro partidos y detecta el 26,8 % de las lesiones nuevas. Con el mismo número de alertas puestas al azar detectaría el 24,7 %.</p>
+        <p>Falla porque usa un solo dato y un solo corte: no tiene en cuenta el descanso, el historial de lesiones, la edad ni el rol. Ese era el listón del modelo.</p>
+        <h3>Ocho datos que se conocen la víspera</h3>
+        <div class="chips">
+          <span>Carga de 14 días</span><span>Minutos del último partido</span><span>Días de descanso</span><span>Back-to-back</span><span>% de titularidades</span><span>Lesiones previas en la temporada</span><span>Playoffs</span><span>Edad</span>
         </div>
-        <h3>KPIs en tensión</h3>
-        <p>Los indicadores tiran en direcciones opuestas. Descansar más reduce las lesiones, pero puede bajar el % de victorias y la disponibilidad, y la liga exige que las estrellas jueguen. El objetivo no es maximizar un KPI, sino mantener la carga controlada sin bajar de la disponibilidad mínima (≥ 85 % de los titulares) y concentrar los descansos donde menos cuestan.</p>
+        <p style="margin-top:20px">Dejé fuera todo lo del propio partido (minutos, puntos, si es titular hoy) porque aún no se ha jugado, y también el nombre y el equipo, para que el modelo aprenda patrones y no memorice jugadores. En cada feature comprobé con un caso real, los primeros partidos de Jayson Tatum en 2023-24, que no usa información del futuro.</p>
       </div>
     </section>
 
     <section class="g block rv">
-      <div class="side"><div class="num">06</div><span class="label">Arquitectura</span></div>
+      <div class="side"><div class="num">07</div><span class="label">Modelo</span></div>
       <div class="body">
-        <h2>De Kaggle a una recomendación la víspera del partido</h2>
-        <p>Diseñé la solución como un motor analítico con dashboard: un panel solo mostraría datos, y el responsable necesita una recomendación que pueda defender.</p>
+        <h2>Un árbol que se lee y un modelo que ordena</h2>
+        <p>Separé los datos por temporadas completas: entreno con 2015-16 a 2020-21, valido con 2022-23 y 2023-24 y guardo 2024-25 y 2025-26 para el test final. Comparé un árbol de decisión de tres niveles, que se puede explicar al cuerpo técnico tal cual, con un gradient boosting.</p>
+        <div class="tw">
+          <table class="t cost">
+            <thead><tr><th>Modelo</th><th>Partidos con alerta</th><th>Lesiones detectadas</th><th>PR-AUC</th></tr></thead>
+            <tbody>
+              <tr><td>Regla actual</td><td>23,8 %</td><td>30,3 %</td><td>—</td></tr>
+              <tr><td>Árbol de decisión</td><td>20,8 %</td><td>41,7 %</td><td>0,017</td></tr>
+              <tr><td>Gradient boosting</td><td>25,4 %</td><td>49,3 %</td><td>0,029</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Validación, temporadas 2022-23 y 2023-24. Con un 1 % de lesiones, la accuracy engaña: decir siempre "no se lesiona" acierta el 99 %. Un modelo que no sabe nada saca una PR-AUC de 0,0096.</p>
+
+        <h3>La señal más fuerte no era la que esperaba</h3>
+        <p>La primera pregunta del árbol no es la carga, sino si el jugador ya se ha lesionado esa temporada. Su regla de alerta cabe en una frase: "alerta si ya se ha lesionado al menos una vez esta temporada y no es un partido de playoffs". La carga sí separa riesgos entre quienes no se han lesionado, pero por sí sola no llega al umbral. La importancia por permutación del gradient boosting dice lo mismo:</p>
+        <div class="bars" role="img" aria-label="Importancia por permutación de las ocho features">
+          <div class="bar"><span>Lesiones previas en la temporada</span><i style="--v:60.6"></i><b>0,030</b></div>
+          <div class="bar"><span>Minutos del último partido</span><i style="--v:57.4"></i><b>0,029</b></div>
+          <div class="bar"><span>Carga de 14 días</span><i style="--v:51.2"></i><b>0,026</b></div>
+          <div class="bar"><span>% de titularidades</span><i style="--v:18.8"></i><b>0,009</b></div>
+          <div class="bar"><span>Días de descanso</span><i style="--v:14.4"></i><b>0,007</b></div>
+          <div class="bar"><span>Playoffs</span><i style="--v:14"></i><b>0,007</b></div>
+          <div class="bar"><span>Back-to-back</span><i style="--v:0.4"></i><b>0,000</b></div>
+          <div class="bar"><span>Edad</span><i style="--v:0"></i><b>−0,002</b></div>
+        </div>
+        <p class="note">Cuánto baja la PR-AUC en el test al desordenar cada feature. El back-to-back y la edad sí importan, pero su información ya está en los días de descanso y en las lesiones previas.</p>
+
+        <h3>Una regla fijada antes de ver los resultados</h3>
+        <p>Ajusté el gradient boosting con validación cruzada temporada a temporada. La mejor combinación mejoraba la media en 0,0038, pero el modelo varía 0,0089 de una temporada a otra. Había decidido antes de mirar que solo cambiaría si la mejora superaba esa variación, así que me quedé con el modelo por defecto. Cambiar la regla después de ver el resultado habría sido elegir la respuesta que quería.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">08</div><span class="label">Coste del error</span></div>
+      <div class="body">
+        <h2>Qué significa una alerta</h2>
+        <p>Incluso en el 1 % de partidos de más riesgo, por cada lesión detectada hay 16 falsas alarmas. Si la alerta significara sentar al jugador, para evitar una lesión que cuesta unos 2 partidos habría que sentar a 16 jugadores sanos, y además arriesgarse a las multas de la NBA. No compensa.</p>
+        <p>Como no puedo poner una cifra exacta a todo lo que cuesta una lesión, hice un análisis de sensibilidad: si una lesión no detectada pesa 10 falsas alarmas o menos, lo más barato es no avisar nunca; con 20 compensa avisar en el 1 % de partidos, y con 50, en el 8 %. <strong>El modelo solo merece la pena si la acción es barata.</strong> De ahí salen dos umbrales:</p>
+        <div class="lights">
+          <div class="l-r"><i></i><b>Rojo</b><span>El 1 % de partidos de más riesgo. Limitar minutos con firmeza y revisión médica. Sentarlo solo si no es una estrella.</span></div>
+          <div class="l-a"><i></i><b>Amarillo</b><span>Del 1 % al 8 %. Revisión médica o de fisioterapia y vigilar sus minutos.</span></div>
+          <div class="l-g"><i></i><b>Verde</b><span>El 92 % restante. Juega con normalidad.</span></div>
+        </div>
+        <h3>Colores, no porcentajes</h3>
+        <p>Para que el modelo no ignorara las lesiones, que son el 1 % de los casos, le di más peso a esa clase. Eso le ayuda a ordenar a los jugadores, pero infla sus números: el umbral rojo es 0,76, y en esos partidos se lesiona un 5,8 %, no un 76 %. Por eso al cuerpo técnico le doy un color y no una probabilidad que no es real. Los umbrales salen de validación y se guardan junto al modelo, sin recalcularlos con el test.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">09</div><span class="label">Resultado</span></div>
+      <div class="body">
+        <h2>Evaluado una sola vez, con datos nuevos</h2>
+        <p>Con todo decidido, evalué el modelo una sola vez en las temporadas 2024-25 y 2025-26, que no había visto.</p>
+        <div class="tw">
+          <table class="t cost">
+            <thead><tr><th></th><th>Partidos con alerta</th><th>Lesiones detectadas</th><th>Alertas que aciertan</th></tr></thead>
+            <tbody>
+              <tr><td>Regla actual</td><td>25,8 %</td><td>27,3 %</td><td>1,74 %</td></tr>
+              <tr><td><b>Semáforo de tres colores</b></td><td><b>9,8 %</b></td><td><b>37,8 %</b></td><td><b>6,30 %</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="margin-top:20px">Con algo más de un tercio de las alertas detecta más lesiones, y cada alerta acierta 3,6 veces más. Un partido en rojo tiene 8 veces más riesgo que uno en verde (9,19 % frente a 1,13 %). La PR-AUC es 3,6 veces la de un modelo sin información, dentro del rango que vi en validación cruzada (de 2,6 a 5,7): el modelo funciona como esperaba, no ha tenido suerte.</p>
+        <h3>En los Celtics</h3>
+        <div class="nums">
+          <div><b>24</b><span>lesiones avisadas en dos temporadas, frente a 20 de la regla actual</span></div>
+          <div><b>290</b><span>alertas, frente a 715</span></div>
+          <div><b>1,6</b><span>jugadores a vigilar por partido, frente a 4</span></div>
+          <div><b>55</b><span>lesiones nuevas en 180 partidos</span></div>
+        </div>
+        <p style="margin-top:20px">No fue igual las dos temporadas: en 2024-25 avisó de 20 de las 39 lesiones, el doble que la regla actual; en 2025-26, de 4 de 16. Con tan pocas lesiones en un solo equipo, cada caso mueve mucho el resultado, y por eso entrené con toda la liga.</p>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">10</div><span class="label">Límites</span></div>
+      <div class="body">
+        <h2>Cuándo no fiarse del color</h2>
+        <ul class="list">
+          <li><b>La primera lesión de la temporada.</b> El modelo se apoya en el historial, así que detecta peor las lesiones de los menores de 25 (30,4 %, frente a cerca del 42 % en el resto): casi la mitad de sus lesiones son la primera del año. La regla actual tenía el problema contrario: casi ignoraba a los veteranos (11,4 %).</li>
+          <li><b>Playoffs.</b> El modelo aprendió que en playoffs hay pocas lesiones nuevas y rebaja mucho el riesgo. Jayson Tatum se lesionó el 02/05/2026 en un partido de playoffs que el modelo había dejado en verde. En playoffs manda el criterio médico.</li>
+          <li><b>Riesgo, no certeza.</b> Incluso en rojo se lesionan unos 9 de cada 100 jugadores, y el 62 % de las lesiones ocurre en partidos en verde: golpes y caídas que ningún modelo con estos datos puede prever.</li>
+          <li><b>Datos de salud.</b> Deducir lesiones de personas identificables es información sensible. El riesgo de cada jugador solo debe verlo el cuerpo médico y técnico, y nunca usarse para negociar contratos, salarios o traspasos.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="g block rv">
+      <div class="side"><div class="num">11</div><span class="label">Siguiente</span></div>
+      <div class="body">
+        <h2>De un notebook a una herramienta</h2>
+        <p>El modelo ya está guardado con sus umbrales, y al volver a cargarlo da exactamente los mismos números en todo el test. El siguiente bloque es convertirlo en un proceso que funcione solo.</p>
       </div>
       <div class="pipeline" aria-label="Arquitectura de la solución">
-        <div><span class="label">Fuente</span><b>Kaggle</b><p>CSV, actualización diaria</p></div>
-        <div><span class="label">Ingesta</span><b>Python</b><p>Descarga sin modificar a data/raw</p></div>
-        <div><span class="label">Limpieza</span><b>pandas</b><p>Tipos, nulos, minutos y textos</p></div>
-        <div><span class="label">Modelo</span><b>Parquet</b><p>Hechos jugador-partido y dimensiones</p></div>
-        <div><span class="label">Motor</span><b>pandas, scikit-learn</b><p>Carga, descansos y semáforo</p></div>
-        <div><span class="label">Dashboard</span><b>Power BI o Streamlit</b><p>Plantilla con semáforo y detalle</p></div>
+        <div><span class="label">Fuente</span><b>Kaggle</b><p>Box scores de NBA.com</p></div>
+        <div><span class="label">Limpieza</span><b>pandas</b><p>Minutos, ausencias y partidos oficiales</p></div>
+        <div><span class="label">Features</span><b>8 datos</b><p>Solo lo que se sabe la víspera</p></div>
+        <div><span class="label">Modelo</span><b>scikit-learn</b><p>Gradient boosting en model.joblib</p></div>
+        <div><span class="label">Umbrales</span><b>JSON</b><p>Rojo y amarillo en thresholds.json</p></div>
+        <div><span class="label">Despliegue</span><b>Bloque 4</b><p>Color la víspera, acceso restringido</p></div>
       </div>
       <div class="body2">
-        <h3>Riesgos que ya tengo identificados</h3>
+        <h3>Lo que viene</h3>
         <ul class="list">
-          <li><b>Una sola fuente.</b> Si el autor del dataset deja de actualizarlo, la alternativa es NBA.com, la fuente original.</li>
-          <li><b>Clasificar mal las ausencias.</b> Con 7.891 variantes de texto, un error al detectar lesiones afectaría directamente a H1.</li>
-          <li><b>Datos de salud.</b> Deducir lesiones de personas identificables es información sensible según el RGPD: la herramienta es solo para el cuidado de los jugadores dentro del club.</li>
-          <li><b>Correlación no es causa.</b> Los entrenadores ya descansan a quien ven cansado, así que los datos muestran asociaciones. Por eso la herramienta recomienda y no ordena.</li>
+          <li><b>Prueba piloto.</b> Usar el semáforo una temporada y registrar qué se hace con cada alerta, para medir si limitar minutos evita lesiones de verdad. Eso no está en los datos.</li>
+          <li><b>Despliegue.</b> Tras cada partido, actualizar los datos de cada jugador, calcular su color para el siguiente y enviarlo al cuerpo médico y técnico.</li>
+          <li><b>Seguimiento.</b> Vigilar cada temporada el % de partidos con alerta, los errores por grupo de edad y los huecos en los datos, y reentrenar con los datos nuevos.</li>
+          <li><b>Mejoras.</b> Una lista de estrellas para aplicar la norma de la NBA jugador a jugador, y las lesiones de temporadas anteriores como feature, para ayudar con los jóvenes.</li>
         </ul>
-        <p style="margin-top:28px"><a class="textlink" href="https://github.com/andreaga-pixel/NBA-dsci-AGA">Ver el brief y el notebook en GitHub ↗</a></p>
+        <p style="margin-top:28px"><a class="textlink" href="https://github.com/andreaga-pixel/NBA-dsci-AGA">Ver el brief y los notebooks en GitHub ↗</a></p>
       </div>
     </section>
 
